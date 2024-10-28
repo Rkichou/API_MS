@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 // Login Controller
-// Login Controller
 /**
  * @swagger
  * /login:
@@ -96,7 +95,6 @@ const login = async (req: Request, res: Response): Promise<void> => {
  *       500:
  *         description: Erreur interne du serveur
  */
-
 const register = async (req: Request, res: Response): Promise<void> => {
   const { email, password, isAdmin } = req.body;
 
@@ -150,6 +148,44 @@ const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+// Delete Controller
+/**
+ * @swagger
+ * /delete:
+ *   post:
+ *     summary: Suppression d'un utilisateur
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Utilisateur supprimé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     email:
+ *                       type: string
+ *                     role:
+ *                       type: boolean
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur interne du serveur
+ */
 const del = async (req: Request, res: Response): Promise<void> => {
   const { _id } = req.body;
 
