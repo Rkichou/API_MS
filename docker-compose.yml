@@ -1,0 +1,30 @@
+services:
+  products-service:
+    build:
+      context: ./products
+      dockerfile: Docker/node/DockerFile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./products:/home/node/app
+    networks:
+      - app-network
+    depends_on:
+      - products-db
+
+  products-db:
+    image: mongo:latest
+    container_name: user-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - products-db-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  products-db-data:
+
+networks:
+  app-network:
+    driver: bridge
