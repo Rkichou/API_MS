@@ -1,13 +1,12 @@
 services:
-
   user-service:
     build:
       context: ./users
       dockerfile: Docker/node/Dockerfile
     ports:
-      - "3001:3000"
+      - "3001:3001"
     volumes:
-      - ./user-service:/home/node/app
+      - ./users:/home/node/app
     networks:
       - app-network
     depends_on:
