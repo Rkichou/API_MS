@@ -16,7 +16,7 @@ connectDB();
 //setupSwagger(app);
 
 // Route simple pour tester l'API
-app.use("/Products", Us);
+app.use("/Products", ProductsRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, World!");
 });

@@ -2,7 +2,7 @@ services:
   products-service:
     build:
       context: ./products
-      dockerfile: Docker/node/DockerFile
+      dockerfile: Docker/node/Dockerfile
     ports:
       - "3002:3002"
     volumes:
