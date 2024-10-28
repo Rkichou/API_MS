@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 
+let isConnected = false;
+
 const connectDB = async () => {
+  if (isConnected) {
+    console.log("Already connected to the database.");
+    return;
+  }
+
   try {
     console.log("Connecting to the database User...");
     const mongoUrl =
@@ -9,6 +16,7 @@ const connectDB = async () => {
       throw new Error("MONGO_URI is not defined in the environment variables");
     }
     const conn = await mongoose.connect(mongoUrl);
+    isConnected = true;
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     if (error instanceof Error) {
@@ -16,7 +24,7 @@ const connectDB = async () => {
     } else {
       console.error("An unknown error occurred");
     }
-    process.exit(1);
+    throw error; // Lever une exception au lieu d'appeler process.exit(1)
   }
 };
 

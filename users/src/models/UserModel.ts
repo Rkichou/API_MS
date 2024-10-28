@@ -1,9 +1,10 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 interface User extends Document {
+  _id: Types.ObjectId;
   email: string;
   password: string;
-  role: Boolean;
+  role: boolean;
 }
 
 const UserSchema: Schema = new Schema({
