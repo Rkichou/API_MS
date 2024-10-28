@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  cart_service:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/yourDatabaseName
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
