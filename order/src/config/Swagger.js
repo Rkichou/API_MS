@@ -17,6 +17,7 @@ definition: {
     },
     ],
     components: {
+   
     schemas: {
         Order: {
             type: 'object',
@@ -38,6 +39,7 @@ definition: {
                     type: 'integer',
                     description: 'Quantity of the product ordered',
                     },
+                  
                     price: {
                     type: 'number',
                     description: 'Price of the product at the time of order',
@@ -55,6 +57,11 @@ definition: {
                 description: 'Current status of the order',
                 enum: ['pending', 'completed', 'shipped', 'cancelled'],
             },
+            trackingNumber: {
+                type: 'string',
+                description: 'Unique tracking number for the order',
+            },
+              
             createdAt: {
                 type: 'string',
                 format: 'date-time',
@@ -77,14 +84,150 @@ definition: {
         },
         },
     },
+    paths: {
+        '/api/orders': {
+          post: {
+            summary: 'Create a new order',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+            requestBody: {
+              required: true,
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/Order' },
+                },
+              },
+            },
+            responses: {
+              201: {
+                description: 'Order created successfully',
+                content: {
+                  'application/json': {
+                    schema: { $ref: '#/components/schemas/Order' },
+                  },
+                },
+              },
+              400: { description: 'Bad request' },
+            },
+          },
+        },
+        '/api/orders/{id}': {
+          get: {
+            summary: 'Get a specific order by ID',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+            parameters: [
+              {
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: { type: 'string' },
+                description: 'Order ID',
+              },
+            ],
+            responses: {
+              200: {
+                description: 'Order retrieved successfully',
+                content: {
+                  'application/json': {
+                    schema: { $ref: '#/components/schemas/Order' },
+                  },
+                },
+              },
+              404: { description: 'Order not found' },
+            },
+          },
+          delete: {
+            summary: 'Cancel an order by ID',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+            parameters: [
+              {
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: { type: 'string' },
+                description: 'Order ID',
+              },
+            ],
+            responses: {
+              200: { description: 'Order cancelled successfully' },
+              404: { description: 'Order not found' },
+            },
+          },
+        },
+        '/api/orders/user/{userId}': {
+          get: {
+            summary: 'Get all orders by user ID',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+            parameters: [
+              {
+                name: 'userId',
+                in: 'path',
+                required: true,
+                schema: { type: 'string' },
+                description: 'User ID',
+              },
+            ],
+            responses: {
+              200: {
+                description: 'List of user orders retrieved successfully',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'array',
+                      items: { $ref: '#/components/schemas/Order' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        '/api/orders/{id}/status': {
+          put: {
+            summary: 'Update the status of an order',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+            parameters: [
+              {
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: { type: 'string' },
+                description: 'Order ID',
+              },
+            ],
+            requestBody: {
+              required: true,
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      status: {
+                        type: 'string',
+                        enum: ['pending', 'completed', 'shipped', 'cancelled'],
+                        description: 'New status for the order',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            responses: {
+              200: { description: 'Order status updated successfully' },
+              400: { description: 'Invalid status value' },
+              404: { description: 'Order not found' },
+            },
+          },
+        },
+      },
     },
-    security: [
-    {
-        bearerAuth: [],
-    },
-    ],
-  apis: ['./src/routes/*.ts', './src/models/*.ts'], // Files containing annotations
-};
+    apis: ['./src/routes/*.ts', './src/models/*.ts'],
+  };
+  
 
 const swaggerSpec = swaggerJSDoc(options);
 

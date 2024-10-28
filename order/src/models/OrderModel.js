@@ -1,6 +1,5 @@
 // src/models/OrderModel.js
 import mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid'; 
 const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -35,8 +34,8 @@ const orderSchema = new mongoose.Schema({
     default: 'pending',
   },
   trackingNumber: {
-    type: String,
-    default: () => uuidv4(), // Génère un UUID unique comme numéro de suivi
+    type: 'string',
+    description: 'Unique tracking number for the order',
   },
   createdAt: {
     type: Date,
