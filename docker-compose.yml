@@ -24,7 +24,6 @@ services:
       - app-network
 
 volumes:
-  time-db-data:
   user-db-data:
 
 networks:
