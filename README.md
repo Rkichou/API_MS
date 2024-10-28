@@ -1,3 +1,4 @@
 # API_MS
 
-users : PORT 3001
+users-service : PORT 3001:3000
+users-mongo : 27017:27017⁠

@@ -189,9 +189,14 @@ const register = async (req: Request, res: Response): Promise<void> => {
 const del = async (req: Request, res: Response): Promise<void> => {
   const { _id } = req.body;
 
+  if (!_id) {
+    res.status(400).json({ msg: "ID de l'utilisateur requis." });
+    return;
+  }
+
   try {
     // Étape 1: Récupérer l'utilisateur
-    const user = await User.findOne({ _id });
+    const user = await User.findOne({ _id: _id as string });
 
     // Vérifier si l'utilisateur existe
     if (!user) {
