@@ -1,7 +1,6 @@
-// src/models/order.model.js
-
-const mongoose = require('mongoose');
-
+// src/models/OrderModel.js
+import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid'; 
 const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -35,10 +34,14 @@ const orderSchema = new mongoose.Schema({
     enum: ['pending', 'completed', 'shipped', 'cancelled'],
     default: 'pending',
   },
+  trackingNumber: {
+    type: String,
+    default: () => uuidv4(), // Génère un UUID unique comme numéro de suivi
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+export default mongoose.model('Order', orderSchema); // Utilisez `export default`

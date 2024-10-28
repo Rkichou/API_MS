@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  command-service:
+  order-service:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -13,7 +13,6 @@ services:
       - .:/app
     depends_on:
       - mongo
-    command: "node src/index.js" # Assure-toi que ce chemin correspond à ton fichier de démarrage
   
   mongo:
     image: mongo:6.0

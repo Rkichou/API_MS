@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import orderController from '../controllers/OrderController'; 
+
 const router = express.Router();
-const orderController = require('../controllers/orderController');
 
 // Créer une nouvelle commande
 router.post('/', orderController.createOrder);
@@ -17,4 +18,4 @@ router.put('/:id/status', orderController.updateOrderStatus);
 // Annuler une commande
 router.delete('/:id', orderController.cancelOrder);
 
-module.exports = router;
+export default router;
