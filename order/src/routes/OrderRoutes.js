@@ -4,7 +4,9 @@ import orderController from '../controllers/OrderController';
 const router = express.Router();
 
 // Créer une nouvelle commande
-router.post('/', orderController.createOrder);
+router.post('/create', orderController.createOrder);
+// recuperer les commandes
+router.get('/', orderController.getOrders);
 
 // Récupérer une commande spécifique par son ID
 router.get('/:id', orderController.getOrderById);

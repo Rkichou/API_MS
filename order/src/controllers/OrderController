@@ -13,6 +13,16 @@ const createOrder = async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la création de la commande.' });
   }
 };
+// Récperer les commandes
+const getOrders = async (req, res) => {
+  try {
+      const orders = await Order.find(); // Retrieves all orders from the database
+      res.status(200).json(orders); // Respond with the orders in JSON format
+  } catch (error) {
+      console.error("Error retrieving orders:", error);
+      res.status(500).json({ error: "Erreur lors de la récupération des commandes." });
+  }
+};
 
 // Récupérer une commande spécifique par ID
 const getOrderById = async (req, res) => {
@@ -42,6 +52,7 @@ const updateOrderStatus = async (req, res) => {
     if (!order) return res.status(404).json({ error: 'Commande non trouvée.' });
 
     order.status = req.body.status;
+    order.updatedAt =  Date.now;
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (error) {
@@ -66,6 +77,7 @@ const cancelOrder = async (req, res) => {
 export default {
   createOrder,
   getOrderById,
+  getOrders,
   getOrdersByUser,
   updateOrderStatus,
   cancelOrder,

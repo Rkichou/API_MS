@@ -85,7 +85,7 @@ definition: {
         },
     },
     paths: {
-        '/api/orders': {
+        '/api/orders/create': {
           post: {
             summary: 'Create a new order',
             tags: ['Orders'],
@@ -101,6 +101,25 @@ definition: {
             responses: {
               201: {
                 description: 'Order created successfully',
+                content: {
+                  'application/json': {
+                    schema: { $ref: '#/components/schemas/Order' },
+                  },
+                },
+              },
+              400: { description: 'Bad request' },
+            },
+          },
+        },
+        '/api/orders/': {
+          get: {
+            summary: 'retrieve orders',
+            tags: ['Orders'],
+            security: [{ bearerAuth: [] }],
+           
+            responses: {
+              201: {
+                description: 'Order retrieved successfully',
                 content: {
                   'application/json': {
                     schema: { $ref: '#/components/schemas/Order' },
