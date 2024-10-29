@@ -1,0 +1,90 @@
+// src/controllers/OrderController.js
+
+import Order from '../models/OrderModel.js';
+
+/**
+ * @swagger
+ * /orders:
+ *   post:
+ *     summary: Créer une nouvelle commande
+ *     tags: [Orders]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *               items:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *               totalAmount:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: Commande créée avec succès
+ *       500:
+ *         description: Erreur lors de la création de la commande
+ */
+const createOrder = async (req, res) => {
+  try {
+    const { userId, items, totalAmount } = req.body;
+    const newOrder = new Order({ userId, items, totalAmount });
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la création de la commande.' });
+  }
+};
+
+/**
+ * @swagger
+ * /orders:
+ *   get:
+ *     summary: Récupérer toutes les commandes
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: Liste des commandes
+ *       500:
+ *         description: Erreur lors de la récupération des commandes
+ */
+const getOrders = async (req, res) => {
+  try {
+      const orders = await Order.find(); // Retrieves all orders from the database
+      res.status(200).json(orders); // Respond with the orders in JSON format
+  } catch (error) {
+      console.error("Error retrieving orders:", error);
+      res.status(500).json({ error: "Erreur lors de la récupération des commandes." });
+  }
+};
+
+/**
+ * @swagger
+ * /orders/{id}:
+ *   get:
+ *     summary: Récupérer une commande spécifique par ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Commande trouvée
+ *       404:
+ *         description: Commande non trouvée
+ *       500:
+ *         description: Erreur lors de la récupération de la commande
+ */
+const getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ error: 'Commande non trouvée.' });
+    res.json(order);
+  } catch (error) {

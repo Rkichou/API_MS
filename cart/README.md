@@ -1,4 +1,4 @@
-# Cart_service 
+# Cart_service
 
 ## Description
 
@@ -10,4 +10,4 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 
 - **Docker** et **Docker Compose** : pour gérer les conteneurs et orchestrer les services.
 - **Node.js** (si vous voulez exécuter en local) : pour installer les dépendances.
-- **PORTS** 3003 et 27020
+- **PORTS** 3003:3003 et 27020:27017

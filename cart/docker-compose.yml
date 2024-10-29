@@ -1,9 +1,8 @@
-version: '3.8'
 services:
   mongo:
     image: mongo
     ports:
-      - "27020:27020"
+      - "27020:27017"
     volumes:
       - mongo-data:/data/db
   cart_service:
@@ -11,7 +10,7 @@ services:
     ports:
       - "3003:3003"
     environment:
-      - MONGO_URI=mongodb://mongo:27020/Cart
+      - MONGO_URI=mongodb://mongo:27017/Cart
     depends_on:
       - mongo
 
