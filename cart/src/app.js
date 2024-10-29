@@ -1,7 +1,9 @@
 const express = require('express');
 const connectDB = require('../src/config/db'); // Chemin vers votre fichier de configuration
+const swaggerDocs = require('../src/config/Swagger'); // Chemin du fichier swagger.js
 
 const app = express();
+swaggerDocs(app); // Applique la documentation Swagger
 
 // Connexion à la base de données
 connectDB();
@@ -16,4 +18,6 @@ app.use('/api/cart', require('../src/routes/cartRoutes')); // Intégrer vos rout
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log('Swagger documentation available at http://localhost:3000/api-docs');
+
 });

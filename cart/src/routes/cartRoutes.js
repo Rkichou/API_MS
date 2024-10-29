@@ -6,8 +6,8 @@ const cartController = require('../controllers/cartController');
 router.post('/add', cartController.addItemToCart);
 router.delete('/remove', cartController.removeItemFromCart);
 router.put('/update', cartController.updateItemQuantity);
-router.get('/:userId', cartController.getCart); // Récupérer le panier d'un utilisateur spécifique
-router.delete('/clear/:userId', cartController.clearCart);
+router.get('/user/:user_id', cartController.getCart); // Récupérer le panier d'un utilisateur spécifique
+router.delete('/clear/:user_id', cartController.clearCart);
 router.get('/all', cartController.getAllCarts);
 
 module.exports = router;

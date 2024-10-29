@@ -17,6 +17,13 @@ const connectDB = async () => {
     console.error(`Error connecting to MongoDB: ${error.message}`); // Affiche l'erreur de connexion
     process.exit(1); // Arrêter le processus en cas d'erreur
   }
+   // Pour supprimer toutes les collections, vous pouvez utiliser :
+    // const collections = mongoose.connection.collections;
+    // for (let collection in collections) {
+    //     await collections[collection].deleteMany({});
+    //     console.log(`Collection '${collection}' vidée.`);
+    // }
+
 };
 
 
