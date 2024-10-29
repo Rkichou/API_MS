@@ -2,9 +2,9 @@ POST http://localhost:3002/products/create
 Content-Type: application/json
 
 {
-  "name": "Télévision",
-  "price": 23.99,
+  "name": "PS4",
+  "price": 230.99,
   "description": "Description du produit",
   "disponibilite": true,
-  "categorie": "TV"
+  "categorie": "Jeux-Vidéo"
 }

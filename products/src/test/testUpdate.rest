@@ -1,8 +1,8 @@
-PUT http://localhost:3002/products/update
+PUT http://localhost:3002/products/update/
 Content-Type: application/json
 
 {
-  "id":"6720f00e6c83171c7fdc2f5b",
+  "_id":"6720f00e6c83171c7fdc2f5b",
   "name": "Télévision",
   "price": 25.99,
   "description": "Description du produit",

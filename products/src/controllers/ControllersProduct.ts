@@ -169,18 +169,18 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
  */
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const product = await Products.findByIdAndDelete(req.params.id);
+    const productId = req.params._id; // Récupérer l'ID du produit à partir des paramètres de l'URL
+    const product = await Products.findByIdAndDelete(productId);
     if (!product) {
-      res.status(400).json({ message: "Erreur lors de la suppression" });
+      res.status(404).json({ message: "Produit non trouvé" }); // Utilise 404 si le produit n'existe pas
       return;
     }
-    res.status(204).json({ message: "Le produit a bien été supprimé" });
-    return;
+
+    res.status(204).send(); // 204 No Content pour indiquer une suppression réussie sans contenu
   } catch (error) {
     res
       .status(500)
       .json({ message: "Erreur lors de la suppression du produit", error });
-    return;
   }
 };
 
@@ -213,13 +213,13 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
  */
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { user_id, prix, name, description, disponibilite, categorie } =
+    const { _id, price, name, description, disponibilite, categorie } =
       req.body;
     const product = await Products.findByIdAndUpdate(
       req.params.id,
       {
-        user_id,
-        prix,
+        _id,
+        price,
         name,
         description,
         disponibilite,

@@ -4,22 +4,6 @@ import swaggerUi from "swagger-ui-express";
 
 const app = express();
 
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "API Produits",
-      version: "1.0.0",
-      description: "Documentation de l'API pour gérer les produits",
-    },
-    servers: [
-      {
-        url: "http://localhost:3002",
-      },
-    ],
-  },
-  apis: ["./routes/*.ts"], // Indiquez le chemin vers vos fichiers avec les annotations Swagger
-};
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -30,7 +14,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "http://localhost:3002",
         description: "Serveur local",
       },
     ],
@@ -75,7 +59,7 @@ const options = {
       },
     },
     paths: {
-      "/products": {
+      "/products/liste": {
         get: {
           summary: "Récupère tous les produits",
           tags: ["Products"],
@@ -96,6 +80,8 @@ const options = {
             500: { description: "Erreur lors de la récupération des produits" },
           },
         },
+      },
+      "/products/create": {
         post: {
           summary: "Crée un nouveau produit",
           tags: ["Products"],
@@ -113,7 +99,7 @@ const options = {
           },
         },
       },
-      "/products/{id}": {
+      "/products/liste/{id}": {
         get: {
           summary: "Récupère un produit par ID",
           tags: ["Products"],
@@ -139,6 +125,8 @@ const options = {
             500: { description: "Erreur lors de la récupération du produit" },
           },
         },
+      },
+      "/products/delete/{id}": {
         delete: {
           summary: "Supprime un produit par ID",
           tags: ["Products"],
@@ -157,6 +145,8 @@ const options = {
             500: { description: "Erreur lors de la suppression du produit" },
           },
         },
+      },
+      "/products/put/{id}": {
         put: {
           summary: "Met à jour un produit par ID",
           tags: ["Products"],
