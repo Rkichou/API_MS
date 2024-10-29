@@ -17,7 +17,6 @@ definition: {
     },
     ],
     components: {
-   
     schemas: {
         Order: {
             type: 'object',
