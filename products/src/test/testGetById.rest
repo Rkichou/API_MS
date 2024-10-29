@@ -1,5 +1,2 @@
-GET http://localhost:3002/products/1
+GET http://localhost:3002/products/liste/6720efa66c83171c7fdc2f58
 Content-Type: application/json
-{
-product_id: 1
-}

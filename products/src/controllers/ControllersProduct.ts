@@ -53,12 +53,14 @@ import { Request, Response } from "express";
  *       500:
  *         description: Erreur lors de la récupération des produits
  */
-const allProduct = async (req: Request, res: Response): Promise<void>  => {
+const allProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const products = await Products.find();
     res.send(products);
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la récupération des produits", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la récupération des produits", error });
     return;
   }
 };
@@ -88,7 +90,7 @@ const allProduct = async (req: Request, res: Response): Promise<void>  => {
  *       500:
  *         description: Erreur lors de la récupération du produit
  */
-const productById = async (req: Request, res: Response):  Promise<void>  => {
+const productById = async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await Products.findById(req.params.id);
     if (!product) {
@@ -97,7 +99,9 @@ const productById = async (req: Request, res: Response):  Promise<void>  => {
     }
     res.json(product);
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la récupération du produit", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la récupération du produit", error });
     return;
   }
 };
@@ -120,13 +124,13 @@ const productById = async (req: Request, res: Response):  Promise<void>  => {
  *       500:
  *         description: Erreur lors de la création du produit
  */
-const newProduct = async (req: Request, res: Response): Promise<void>  => {
+const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { user_id, prix, name, description, disponibilite, categorie } =
+    const { user_id, price, name, description, disponibilite, categorie } =
       req.body;
     const product = new Products({
       user_id,
-      prix,
+      price,
       name,
       description,
       disponibilite,
@@ -135,7 +139,9 @@ const newProduct = async (req: Request, res: Response): Promise<void>  => {
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la création du produit", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la création du produit", error });
     return;
   }
 };
@@ -171,7 +177,9 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     res.status(204).json({ message: "Le produit a bien été supprimé" });
     return;
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la suppression du produit", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la suppression du produit", error });
     return;
   }
 };
@@ -225,7 +233,9 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
     }
     res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la mise à jour du produit", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la mise à jour du produit", error });
     return;
   }
 };

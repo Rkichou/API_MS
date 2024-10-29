@@ -20,17 +20,6 @@ const swaggerOptions = {
   },
   apis: ["./routes/*.ts"], // Indiquez le chemin vers vos fichiers avec les annotations Swagger
 };
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-app.listen(3002, () =>
-  console.log("Serveur en cours d'exécution sur http://localhost:3002")
-);
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
-import express from "express";
-
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -200,7 +189,7 @@ const options = {
   apis: ["./src/routes/*.ts", "./src/models/*.ts"],
 };
 
-const swaggerSpec = swaggerJSDoc(options);
+const swaggerSpec = swaggerJsDoc(options);
 
 export const setupSwagger = (app: express.Application) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import connectDB from "./config/db";
 import ProductsRouter from "./routes/RoutesProducts";
 import cors from "cors";
-//import setupSwagger from "./config/swagger";
+import { setupSwagger } from "./config/swagger";
 
 const app = express();
 const port = process.env.PORTPRODUCTS || 3002;
@@ -13,10 +13,10 @@ app.use(express.json());
 connectDB();
 
 // Configurer Swagger
-//setupSwagger(app);
+setupSwagger(app);
 
 // Route simple pour tester l'API
-app.use("/Products", ProductsRouter);
+app.use("/products", ProductsRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, World!");
 });
