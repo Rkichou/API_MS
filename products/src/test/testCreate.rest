@@ -6,6 +6,6 @@ Content-Type: application/json
   "name":"ordinateur",
   "price": 12.90,
   "descriptione": "Test-Description",
-  "disponibilite": True,
+  "disponibilite": true,
   "categorie": "Higth-Tech"
 }

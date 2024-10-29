@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "start": "ts-node src/app.ts",
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/app.ts",
+    "swagger": "node src/config/swagger.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -14,6 +15,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb-memory-server": "^10.1.2",
     "mongoose": "^8.7.3",
+    "products-service": "file:",
     "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
