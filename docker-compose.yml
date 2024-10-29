@@ -1,5 +1,29 @@
 services:
 
+  user-service:
+    build:
+      context: ./users
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./users:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - user-db
+
+  user-db:
+    image: mongo:latest 
+    container_name: user-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - user-db-data:/data/db
+    networks:
+      - app-network
+
   cart_service:
     build:
       context: ./cart
@@ -25,6 +49,7 @@ services:
       - app-network
 
 volumes:
+  user-db-data:
   cart-db-data:
 
 networks:
