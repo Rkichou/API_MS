@@ -5,7 +5,7 @@ const connectDB = async () => {
   try {
     // Connexion à la base de données MongoDB
     const conn = await mongoose.connect(
-      process.env.MONGO_URI || "mongodb://mongo:27017/Cart",
+      process.env.MONGO_URI || "mongodb://cart-db:27017/Cart",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

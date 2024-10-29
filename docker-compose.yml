@@ -1,18 +1,32 @@
 services:
-  mongo:
-    image: mongo
-    ports:
-      - "27020:27020"
-    volumes:
-      - mongo-data:/data/db
+
   cart_service:
-    build: .
+    build:
+      context: ./cart
+      dockerfile: Docker/node/Dockerfile
     ports:
       - "3003:3003"
-    environment:
-      - MONGO_URI=mongodb://mongo:27020/Cart
+    volumes:
+      - ./cart:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
     depends_on:
-      - mongo
+      - cart-db
+
+  cart-db:
+    image: mongo:latest
+    container_name: cart-mongo
+    ports:
+      - "27020:27017"
+    volumes:
+      - cart-db-data:/data/db
+    networks:
+      - app-network
 
 volumes:
-  mongo-data:
+  cart-db-data:
+
+networks:
+  app-network:
+    driver: bridge

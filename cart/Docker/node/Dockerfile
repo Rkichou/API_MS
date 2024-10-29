@@ -1,5 +1,5 @@
 # Utiliser une image node officielle
-FROM node:14
+FROM node:lts-slim
 
 # Définir le répertoire de travail
 WORKDIR /usr/src/app
@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 3003
 
 # Démarrer l'application
-CMD ["node", "src/app.js"]
+CMD ["npm", "start"]
