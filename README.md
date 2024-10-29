@@ -1,5 +1,5 @@
 # API_MS
 
 -Ports :
--service : 3002:3002
--mongo : 27017:27017
+-product-service : 3002:3002
+-product-mongo : 27017:27017
