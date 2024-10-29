@@ -1,0 +1,5 @@
+DELETE  http://localhost:3002/delete/1
+Content-Type: application/json
+{
+  "products_id": 1
+}

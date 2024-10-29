@@ -1,0 +1,11 @@
+POST http://localhost:3002/create
+Content-Type: application/json
+
+{
+  "product_id": 1,
+  "name":"ordinateur",
+  "price": 12.90,
+  "descriptione": "Test-Description",
+  "disponibilite": True,
+  "categorie": "Higth-Tech"
+}
