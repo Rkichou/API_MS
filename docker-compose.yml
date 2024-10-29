@@ -17,7 +17,7 @@ services:
     image: mongo:latest
     container_name: products-mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - products-db-data:/data/db
     networks:
