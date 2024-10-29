@@ -1,0 +1,37 @@
+### Add item to cart
+POST http://localhost:3003/api/cart/add
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde",
+    "quantity": 2
+}
+
+### Remove item from cart
+DELETE http://localhost:3003/api/cart/remove
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde"
+}
+
+### Update item quantity in cart
+PUT http://localhost:3003/api/cart/update
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde",
+    "quantity": 5
+}
+
+### Get cart for a specific user
+GET http://localhost:3003/api/cart/user/12345
+
+### Clear cart for a specific user
+DELETE http://localhost:3003/api/cart/clear/12345
+
+### Get all carts
+GET http://localhost:3003/api/cart/all
