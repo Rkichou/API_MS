@@ -1,0 +1,33 @@
+# OrderRoutes.rest
+
+### Create a new order
+POST http://localhost:3000/api/orders/create
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "items": [
+    { "productId": "0", "quantity": 2 }
+  ],
+  "total": 100
+}
+
+### Get all orders
+GET http://localhost:3000/api/orders
+
+### Get an order by ID
+GET http://localhost:3000/api/orders/1
+
+### Get orders by user ID
+GET http://localhost:3000/api/orders/user/100
+
+### Update the status of an order
+PUT http://localhost:3000/api/orders/1/status
+Content-Type: application/json
+
+{
+  "status": "shipped"
+}
+
+### Cancel an order
+DELETE http://localhost:3000/api/orders/1
