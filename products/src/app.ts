@@ -5,7 +5,7 @@ import cors from "cors";
 //import setupSwagger from "./config/swagger";
 
 const app = express();
-const port = process.env.PORTUSERS || 3001;
+const port = process.env.PORTPRODUCTS || 3002;
 
 // Middleware pour parser le JSON
 app.use(cors());

@@ -1,4 +1,4 @@
-import Products from "../models/ProductsModel";
+import Products from "../models/ModelsProducts";
 import { Request, Response } from "express";
 
 /**
@@ -53,14 +53,13 @@ import { Request, Response } from "express";
  *       500:
  *         description: Erreur lors de la récupération des produits
  */
-const allProduct = async (req: Request, res: Response) => {
+const allProduct = async (req: Request, res: Response): Promise<void>  => {
   try {
     const products = await Products.find();
     res.send(products);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erreur lors de la récupération des produits", error });
+    res.status(500).json({ message: "Erreur lors de la récupération des produits", error });
+    return;
   }
 };
 
@@ -89,17 +88,17 @@ const allProduct = async (req: Request, res: Response) => {
  *       500:
  *         description: Erreur lors de la récupération du produit
  */
-const productById = async (req: Request, res: Response) => {
+const productById = async (req: Request, res: Response):  Promise<void>  => {
   try {
     const product = await Products.findById(req.params.id);
     if (!product) {
-      return res.status(400).json({ message: "Produit non trouvé" });
+      res.status(400).json({ message: "Produit non trouvé" });
+      return;
     }
     res.json(product);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erreur lors de la récupération du produit", error });
+    res.status(500).json({ message: "Erreur lors de la récupération du produit", error });
+    return;
   }
 };
 
@@ -121,7 +120,7 @@ const productById = async (req: Request, res: Response) => {
  *       500:
  *         description: Erreur lors de la création du produit
  */
-const newProduct = async (req: Request, res: Response) => {
+const newProduct = async (req: Request, res: Response): Promise<void>  => {
   try {
     const { user_id, prix, name, description, disponibilite, categorie } =
       req.body;
@@ -136,9 +135,8 @@ const newProduct = async (req: Request, res: Response) => {
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erreur lors de la création du produit", error });
+    res.status(500).json({ message: "Erreur lors de la création du produit", error });
+    return;
   }
 };
 
@@ -163,17 +161,18 @@ const newProduct = async (req: Request, res: Response) => {
  *       500:
  *         description: Erreur lors de la suppression du produit
  */
-const deleteProduct = async (req: Request, res: Response) => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await Products.findByIdAndDelete(req.params.id);
     if (!product) {
-      return res.status(400).json({ message: "Erreur lors de la suppression" });
+      res.status(400).json({ message: "Erreur lors de la suppression" });
+      return;
     }
-    return res.status(204).json({ message: "Le produit a bien été supprimé" });
+    res.status(204).json({ message: "Le produit a bien été supprimé" });
+    return;
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erreur lors de la suppression du produit", error });
+    res.status(500).json({ message: "Erreur lors de la suppression du produit", error });
+    return;
   }
 };
 
@@ -204,7 +203,7 @@ const deleteProduct = async (req: Request, res: Response) => {
  *       500:
  *         description: Erreur lors de la mise à jour du produit
  */
-const updateProduct = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { user_id, prix, name, description, disponibilite, categorie } =
       req.body;
@@ -221,13 +220,13 @@ const updateProduct = async (req: Request, res: Response) => {
       { new: true }
     );
     if (!product) {
-      return res.status(400).json({ message: "Erreur lors de la mise à jour" });
+      res.status(400).json({ message: "Erreur lors de la mise à jour" });
+      return;
     }
     res.status(200).json(product);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erreur lors de la mise à jour du produit", error });
+    res.status(500).json({ message: "Erreur lors de la mise à jour du produit", error });
+    return;
   }
 };
 
