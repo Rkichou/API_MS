@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
     // Connexion à la base de données MongoDB
-    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://mongo:27017/Cart', {
+    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://mongo:27020/Cart', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true, // Pour créer des index automatiquement

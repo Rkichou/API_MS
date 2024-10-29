@@ -15,9 +15,9 @@ app.use(express.json()); // Pour analyser les requêtes JSON
 app.use('/api/cart', require('../src/routes/cartRoutes')); // Intégrer vos routes
 
 // Démarrer le serveur
-const PORT = process.env.PORT || 3000;
+const PORT =  3003;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log('Swagger documentation available at http://localhost:3000/api-docs');
+  console.log('Swagger documentation available at http://localhost:3003/api-docs');
 
 });
