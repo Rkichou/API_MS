@@ -7,6 +7,7 @@ services:
       - "3002:3002"
     volumes:
       - ./products:/home/node/app
+      - /home/node/app/node_modules
     networks:
       - app-network
     depends_on:
