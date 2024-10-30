@@ -56,17 +56,31 @@ const getOrdersByUser = async (req, res) => {
 // Mettre à jour le statut d'une commande
 const updateOrderStatus = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: "Commande non trouvée." });
+    const { id } = req.params;
+    const { status } = req.body;
 
-    order.status = req.body.status;
-    order.updatedAt = Date.now;
-    const updatedOrder = await order.save();
-    res.json(updatedOrder);
+    console.log(
+      `Attempting to update order with id: ${id} to status: ${status}`
+    );
+
+    const order = await Order.findByIdAndUpdate(
+      id,
+      { status, updatedAt: Date.now() },
+      { new: true }
+    );
+
+    if (!order) {
+      console.log(`Order with id: ${id} not found`);
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    console.log(
+      `Order with id: ${id} updated successfully to status: ${status}`
+    );
+    res.status(200).json(order);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la mise à jour de la commande." });
+    console.error("Error updating order status:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -88,15 +102,21 @@ const cancelOrder = async (req, res) => {
 
 const delOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: "Commande non trouvée." });
+    const { id } = req.params;
+    console.log(`Attempting to delete order with id: ${id}`);
 
-    await order.remove();
-    res.json({ message: "Commande supprimée avec succès." });
+    const order = await Order.findByIdAndDelete(id);
+
+    if (!order) {
+      console.log(`Order with id: ${id} not found`);
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    console.log(`Order with id: ${id} deleted successfully`);
+    res.status(200).json({ message: "Order deleted successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la suppression de la commande." });
+    console.error("Error deleting order:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
