@@ -169,18 +169,27 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
  */
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const productId = req.params._id; // Récupérer l'ID du produit à partir des paramètres de l'URL
-    const product = await Products.findByIdAndDelete(productId);
-    if (!product) {
-      res.status(404).json({ message: "Produit non trouvé" }); // Utilise 404 si le produit n'existe pas
+    const { _id } = req.body;
+    console.log("ID du produit à supprimer:", _id); // Log de l'ID du produit
+
+    if (!_id) {
+      console.log("ID du produit manquant");
+      res.status(400).json({ message: "ID du produit manquant" });
       return;
     }
 
-    res.status(204).send(); // 204 No Content pour indiquer une suppression réussie sans contenu
+    const product = await Products.findByIdAndDelete(_id);
+    if (!product) {
+      console.log("Produit non trouvé");
+      res.status(404).json({ message: "Produit non trouvé" });
+      return;
+    }
+
+    console.log("Produit supprimé avec succès");
+    res.status(201).json({message: "Produit supprimé avec succès"});
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la suppression du produit", error });
+    console.error("Erreur lors de la suppression du produit:", error);
+    res.status(500).json({ message: "Erreur lors de la suppression du produit", error });
   }
 };
 
@@ -231,7 +240,7 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: "Erreur lors de la mise à jour" });
       return;
     }
-    res.status(200).json(product);
+    res.status(201).json({ message: "Produit mis à jour avec succès", product });
   } catch (error) {
     res
       .status(500)
