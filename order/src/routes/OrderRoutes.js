@@ -15,9 +15,11 @@ router.get("/:id", orderController.getOrderById);
 router.get("/user/:user_id", orderController.getOrdersByUser);
 
 // Mettre à jour le statut d'une commande
-router.put("/:id/status", orderController.updateOrderStatus);
+router.put("/update/:id", orderController.updateOrderStatus);
 
 // Annuler une commande
-router.delete("/:id", orderController.cancelOrder);
+router.put("/cancel/:id", orderController.cancelOrder);
+
+router.delete("/:id", orderController.delOrder);
 
 export default router;

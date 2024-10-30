@@ -18,12 +18,21 @@ Content-Type: application/json
 ###
 
 # Get an order by ID
-GET http://localhost:3000/api/orders/67220210f4e6f60bb4fec2c1
+GET http://localhost:3000/api/orders/67220f662c0e76a32b11e36a
 
 ###
 
-# Update an order status
-PATCH http://localhost:3000/api/orders/67220210f4e6f60bb4fec2c1
+# Get all orders by user ID
+GET http://localhost:3000/api/orders/user/60d0fe4f5311236168a109ca
+###
+
+# Get all orders
+GET http://localhost:3000/api/orders/
+
+###
+
+# Update an order status ( A FIX)
+PUT http://localhost:3000/api/orders/update/67220f662c0e76a32b11e36a
 Content-Type: application/json
 
 {
@@ -32,5 +41,5 @@ Content-Type: application/json
 
 ###
 
-# Delete an order
-DELETE http://localhost:3000/api/orders/67220210f4e6f60bb4fec2c1
+# Delete an order ( A FIX)
+DELETE http://localhost:3000/api/orders/67220f662c0e76a32b11e36a
