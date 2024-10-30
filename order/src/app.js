@@ -1,18 +1,18 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import OrderRoutes from './routes/OrderRoutes.js';
-import { setupSwagger } from './config/Swagger.js'; 
-import connectDB from './config/db.js';
+import express from "express";
+import dotenv from "dotenv";
+import OrderRoutes from "./routes/OrderRoutes.js";
+import { setupSwagger } from "./config/Swagger.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 setupSwagger(app);
 app.use(express.json());
 
 // Routes
-app.use('/api/orders', OrderRoutes);
+app.use("/api/orders", OrderRoutes);
 
 // Connect to the database and start the server
 const startServer = async () => {

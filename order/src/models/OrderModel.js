@@ -1,7 +1,7 @@
 // src/models/OrderModel.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
-  userId: {
+  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
@@ -28,12 +28,12 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'completed', 'shipped', 'cancelled'],
-    default: 'pending',
+    enum: ["pending", "completed", "shipped", "cancelled"],
+    default: "pending",
   },
   trackingNumber: {
-    type: 'string',
-    description: 'Unique tracking number for the order',
+    type: "string",
+    description: "Unique tracking number for the order",
   },
   createdAt: {
     type: Date,
@@ -41,8 +41,7 @@ const orderSchema = new mongoose.Schema({
   },
   updatedAt: {
     type: Date,
-    
   },
 });
 
-export default mongoose.model('Order', orderSchema); // Utilisez `export default`
+export default mongoose.model("Order", orderSchema); // Utilisez `export default`

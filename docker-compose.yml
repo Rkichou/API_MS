@@ -1,23 +1,29 @@
 services:
   order-service:
     build:
-      context: .
-      dockerfile: ./order/docker/Dockerfile
+      context: ./order
+      dockerfile: /docker/Dockerfile
     ports:
-      - "${PORT}:3000" # Utilise la variable d'environnement PORT définie dans .env
-    env_file:
-      - .env
+      - "3000:3000"
     volumes:
       - .:/app
     depends_on:
-      - mongo
+      - order-db
+    networks:
+      - app-network
   
-  mongo:
-    image: mongo:6.0
+  order-db:
+    image: mongo:latest
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
-      - mongo_data:/data/db
+      - order-db-data:/data/db
+    networks:
+      - app-network
 
-volumes:
-  mongo_data:
+volumes:  
+  order-db-data:
+
+networks:
+  app-network:
+    driver: bridge

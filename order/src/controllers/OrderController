@@ -1,26 +1,30 @@
 // src/controllers/OrderController.js
 
-import Order from '../models/OrderModel.js';
+import Order from "../models/OrderModel.js";
 
 // Créer une nouvelle commande
 const createOrder = async (req, res) => {
   try {
-    const { userId, items, totalAmount } = req.body;
-    const newOrder = new Order({ userId, items, totalAmount });
+    const { user_id, items, totalAmount } = req.body;
+    const newOrder = new Order({ user_id, items, totalAmount });
     const savedOrder = await newOrder.save();
     res.status(201).json(savedOrder);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la création de la commande.' });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la création de la commande." });
   }
 };
 // Récperer les commandes
 const getOrders = async (req, res) => {
   try {
-      const orders = await Order.find(); // Retrieves all orders from the database
-      res.status(200).json(orders); // Respond with the orders in JSON format
+    const orders = await Order.find(); // Retrieves all orders from the database
+    res.status(200).json(orders); // Respond with the orders in JSON format
   } catch (error) {
-      console.error("Error retrieving orders:", error);
-      res.status(500).json({ error: "Erreur lors de la récupération des commandes." });
+    console.error("Error retrieving orders:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des commandes." });
   }
 };
 
@@ -28,20 +32,24 @@ const getOrders = async (req, res) => {
 const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: 'Commande non trouvée.' });
+    if (!order) return res.status(404).json({ error: "Commande non trouvée." });
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération de la commande.' });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération de la commande." });
   }
 };
 
 // Récupérer toutes les commandes d'un utilisateur
 const getOrdersByUser = async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.params.userId });
+    const orders = await Order.find({ user_id: req.params.user_id });
     res.json(orders);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des commandes.' });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des commandes." });
   }
 };
 
@@ -49,14 +57,16 @@ const getOrdersByUser = async (req, res) => {
 const updateOrderStatus = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: 'Commande non trouvée.' });
+    if (!order) return res.status(404).json({ error: "Commande non trouvée." });
 
     order.status = req.body.status;
-    order.updatedAt =  Date.now;
+    order.updatedAt = Date.now;
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la mise à jour de la commande.' });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la mise à jour de la commande." });
   }
 };
 
@@ -64,13 +74,15 @@ const updateOrderStatus = async (req, res) => {
 const cancelOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: 'Commande non trouvée.' });
+    if (!order) return res.status(404).json({ error: "Commande non trouvée." });
 
-    order.status = 'cancelled';
+    order.status = "cancelled";
     const cancelledOrder = await order.save();
     res.json(cancelledOrder);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de l\'annulation de la commande.' });
+    res
+      .status(500)
+      .json({ error: "Erreur lors de l'annulation de la commande." });
   }
 };
 
