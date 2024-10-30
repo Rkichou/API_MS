@@ -10,6 +10,7 @@ interface Product extends Document {
 }
 
 const ProductSchema: Schema = new Schema({
+  _id: { type: Types.ObjectId, required: true },
   name: { type: String, required: true, unique: true },
   price: { type: Number, required: true },
   description: { type: String, required: true },

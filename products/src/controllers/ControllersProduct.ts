@@ -8,14 +8,14 @@ import { Request, Response } from "express";
  *     Product:
  *       type: object
  *       required:
- *         - user_id
+ *         - _id
  *         - prix
  *         - name
  *         - description
  *         - disponibilite
  *         - categorie
  *       properties:
- *         user_id:
+ *         _id:
  *           type: string
  *           description: L'identifiant de l'utilisateur qui ajoute le produit
  *         prix:
@@ -126,10 +126,10 @@ const productById = async (req: Request, res: Response): Promise<void> => {
  */
 const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { user_id, price, name, description, disponibilite, categorie } =
+    const { _id, price, name, description, disponibilite, categorie } =
       req.body;
     const product = new Products({
-      user_id,
+      _id,
       price,
       name,
       description,

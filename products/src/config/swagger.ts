@@ -30,7 +30,7 @@ const options = {
             "categorie",
           ],
           properties: {
-            user_id: {
+            _id: {
               type: "string",
               description: "L'ID de l'utilisateur ajoutant le produit",
             },
