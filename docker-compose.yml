@@ -15,7 +15,7 @@ services:
   order-db:
     image: mongo:latest
     ports:
-      - "27018:27017"
+      - "27019:27017"
     volumes:
       - order-db-data:/data/db
     networks:

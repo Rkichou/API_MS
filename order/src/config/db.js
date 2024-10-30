@@ -20,10 +20,13 @@ const connectDB = async () => {
 export const ensureDatabaseConnection = async () => {
   if (mongoose.connection.readyState !== 1) {
     try {
-      await mongoose.connect(process.env.MONGO_URI ?? "mongodb://mongo:27017", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      await mongoose.connect(
+        process.env.MONGO_URI ?? "mongodb://order-db:27017",
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }
+      );
     } catch (error) {
       console.error("Error ensuring database connection:", error);
       throw error;
