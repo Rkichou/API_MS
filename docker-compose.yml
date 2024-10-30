@@ -47,10 +47,35 @@ services:
       - cart-db-data:/data/db
     networks:
       - app-network
+  
+  products-service:
+    build:
+      context: ./products
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./products:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - products-db
+
+  products-db:
+    image: mongo:latest
+    container_name: products-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - products-db-data:/data/db
+    networks:
+      - app-network
 
 volumes:
   user-db-data:
   cart-db-data:
+  products-db-data:
 
 networks:
   app-network:

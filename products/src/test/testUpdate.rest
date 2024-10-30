@@ -1,0 +1,6 @@
+PUT http://localhost:3002/products/update/671f747f6224979ee66c53db
+Content-Type: application/json
+
+{
+  "price": "5"
+}
