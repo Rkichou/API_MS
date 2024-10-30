@@ -3,7 +3,7 @@ const port = 3000; // Utiliser le même port que dans jest.setup.ts
 const baseUrl = `http://localhost:${port}`;
 describe('API Orders', () => {
   // Test de création d'une nouvelle commande
- /* it('should create a new order', async () => {
+  it('should create a new order', async () => {
     const response = await request(baseUrl)
       .post('/api/orders/create')
       .send({
@@ -20,12 +20,13 @@ describe('API Orders', () => {
             price: 9.99
             }
         ],
+        id:1,
         totalAmount: 49.97
             });
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty('orderId');
-  });*/
+  });
 
   // Test de récupération de toutes les commandes
   it('should get all orders', async () => {
