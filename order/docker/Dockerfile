@@ -2,10 +2,10 @@ FROM node:lts-slim
 
 WORKDIR /home/node/app
 
-COPY ./order/package*.json ./
+COPY ./package*.json ./
 RUN npm install
 
-COPY ./order ./
+COPY . .
 
 EXPOSE 3000
 

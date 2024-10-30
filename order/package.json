@@ -5,7 +5,7 @@
     "description": "Microservice for handling orders in the ecommerce system",
     "main": "src/index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "node src/app.js",
         "dev": "nodemon src/index.js",
         "lint": "eslint .",
         "swagger": "node src/swagger.js",

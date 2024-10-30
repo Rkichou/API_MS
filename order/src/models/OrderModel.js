@@ -1,5 +1,5 @@
 // src/models/OrderModel.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -28,8 +28,8 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'completed', 'shipped', 'cancelled'],
-    default: 'pending',
+    enum: ["pending", "completed", "shipped", "cancelled"],
+    default: "pending",
   },
   trackingNumber: {
     type: 'string',
@@ -40,8 +40,7 @@ const orderSchema = new mongoose.Schema({
   },
   updatedAt: {
     type: Date,
-    
   },
 });
 
-export default mongoose.model('Order', orderSchema); // Utilisez `export default`
+export default mongoose.model("Order", orderSchema); // Utilisez `export default`
