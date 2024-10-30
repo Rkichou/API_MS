@@ -1,7 +1,7 @@
 // src/models/OrderModel.js
 import mongoose from 'mongoose';
 const orderSchema = new mongoose.Schema({
-  userId: {
+  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
@@ -33,7 +33,6 @@ const orderSchema = new mongoose.Schema({
   },
   trackingNumber: {
     type: 'string',
-    description: 'Unique tracking number for the order',
   },
   createdAt: {
     type: Date,
