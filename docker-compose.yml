@@ -72,10 +72,33 @@ services:
     networks:
       - app-network
 
+  order-service:
+    build:
+      context: ./order
+      dockerfile: /docker/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - order-db
+    networks:
+      - app-network
+  
+  order-db:
+    image: mongo:latest
+    ports:
+      - "27019:27017"
+    volumes:
+      - order-db-data:/data/db
+    networks:
+      - app-network
+      
 volumes:
   user-db-data:
   cart-db-data:
   products-db-data:
+  order-db-data:
 
 networks:
   app-network:
