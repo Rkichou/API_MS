@@ -1,11 +1,11 @@
 // routes/orders.js
-const express = require('express');
-const axios = require('axios');
+import { Router } from "express";
+import axios from "axios";
 
-const router = express.Router();
+const router = Router();
 
 // Route pour gérer les orders
-router.all('/*', async (req, res) => {
+router.all("/*", async (req, res) => {
   try {
     const response = await axios({
       method: req.method,
@@ -20,4 +20,4 @@ router.all('/*', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
