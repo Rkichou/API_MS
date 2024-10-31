@@ -1,0 +1,7 @@
+DELETE http://localhost:3002/products/delete
+Content-Type: application/json
+
+{
+  "_id": "671f747f6224979ee66c53db"
+}
+

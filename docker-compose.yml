@@ -1,4 +1,77 @@
 services:
+
+  user-service:
+    build:
+      context: ./users
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./users:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - user-db
+
+  user-db:
+    image: mongo:latest 
+    container_name: user-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - user-db-data:/data/db
+    networks:
+      - app-network
+
+  cart_service:
+    build:
+      context: ./cart
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./cart:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - cart-db
+
+  cart-db:
+    image: mongo:latest
+    container_name: cart-mongo
+    ports:
+      - "27020:27017"
+    volumes:
+      - cart-db-data:/data/db
+    networks:
+      - app-network
+  
+  products-service:
+    build:
+      context: ./products
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./products:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - products-db
+
+  products-db:
+    image: mongo:latest
+    container_name: products-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - products-db-data:/data/db
+    networks:
+      - app-network
+
   order-service:
     build:
       context: ./order
@@ -20,8 +93,11 @@ services:
       - order-db-data:/data/db
     networks:
       - app-network
-
-volumes:  
+      
+volumes:
+  user-db-data:
+  cart-db-data:
+  products-db-data:
   order-db-data:
 
 networks:
