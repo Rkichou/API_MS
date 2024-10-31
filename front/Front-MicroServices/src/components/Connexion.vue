@@ -52,6 +52,12 @@
               v-model="password"
             />
           </div>
+          <div class="form-group">
+            <label for="checkbox"
+              >IsAdmin
+              <input type="checkbox" id="checkbox" v-model="checked" />
+            </label>
+          </div>
           <button type="submit" class="login-button">Créer votre compte</button>
         </form>
       </div>
@@ -66,12 +72,14 @@ export default {
     return {
       email: "",
       password: "",
+      isAdmin: "false",
     };
   },
   methods: {
     async handleSubmit() {
       console.log("Email:", this.email);
       console.log("Mot de passe:", this.password);
+      console.log("IsAdmin", this.isAdmin);
       console.log("Compte créé");
 
       try {
@@ -81,6 +89,7 @@ export default {
           body: JSON.stringify({
             email: this.email,
             password: this.password,
+            isAdmin: this.isAdmin,
           }),
         });
 
