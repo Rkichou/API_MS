@@ -1,5 +1,4 @@
 services:
-
   user-service:
     build:
       context: ./users
@@ -15,7 +14,7 @@ services:
       - user-db
 
   user-db:
-    image: mongo:latest 
+    image: mongo:latest
     container_name: user-mongo
     ports:
       - "27017:27017"
@@ -37,6 +36,19 @@ services:
       - app-network
     depends_on:
       - cart-db
+  front:
+    build:
+      context: ./front
+      dockerfile: Docker/Dockerfile
+    command: npm run dev
+
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./front:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
 
   cart-db:
     image: mongo:latest
