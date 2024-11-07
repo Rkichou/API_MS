@@ -7,3 +7,5 @@
 -product-service : 3002:3002 -product-mongo : 27018:27017
 
 -cart-service: 3003:3003 -cart-mongo: 27020:27017
+
+-apigateway-service: 3005:3005
