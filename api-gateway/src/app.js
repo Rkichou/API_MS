@@ -24,7 +24,9 @@ app.use("/users", handleUsersRequest);
 app.use("/orders", handleOrdersRequest);
 app.use("/products", handleProductsRequest);
 app.use("/cart", handleCartRequest);
-
+app.use("/", (req, res) => {
+  res.send("API Gateway");
+});
 app.listen(PORT, () => {
   console.log(`API Gateway running on port ${PORT}`);
 });

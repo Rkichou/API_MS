@@ -1,5 +1,5 @@
 ### Test for Users Service
-GET http://localhost:3005
+GET http://localhost:3005/users
 Content-Type: application/json
 
 ###
