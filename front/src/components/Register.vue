@@ -59,7 +59,7 @@ export default {
 
 <template>
   <div class="container">
-    <h1 class="page-title">Ecommerce</h1>
+    <h1 class="page-title">Register</h1>
     <div class="login-card">
       <h2>Création de compte</h2>
       <form @submit.prevent="handleSubmit">
@@ -108,10 +108,12 @@ export default {
 }
 
 .container {
-  background-color: #69c3fa;
+  background-color: #000000;
   height: 100%;
   width: 100%;
   padding: 2em;
+  position: relative;
+  left: 55px;
 }
 
 .login-page {

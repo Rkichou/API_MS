@@ -93,7 +93,7 @@ export default {
 
 <template>
   <div class="container">
-    <h1 class="page-title">Ecommerce</h1>
+    <h1 class="page-title">Login</h1>
     <div class="login-page">
       <div class="login-card">
         <h2>Connexion</h2>
@@ -138,10 +138,12 @@ export default {
 }
 
 .container {
-  background-color: #69c3fa;
+  background-color: #000000;
   height: 100%;
   width: 100%;
   padding: 2em;
+  position: relative;
+  left: 55px;
 }
 
 .login-page {

@@ -18,18 +18,17 @@ export default {
         </div>
 
         <div className="menu">
-          <div class="products">Product</div>
+          <div class="products">
+            <router-link to="/products" class="btn-login">Products</router-link>
+          </div>
           <div class="cart-Login">
             <router-link to="/login" class="btn-login">Login</router-link>
           </div>
           <div class="cart-register">
-            <router-link to="/register" class="btn-register"
-              >Register</router-link
-            >
+            <router-link to="/register" class="btn-login">Register</router-link>
           </div>
         </div>
       </nav>
-      <h1>Notre Magasin de Tech</h1>
       <div class="principal">
         <div class="annonce-right slide-fade-in">
           <h1 class="text">Carte Graphique</h1>
@@ -62,10 +61,15 @@ export default {
 <style scooped>
 .container {
   width: 1940px;
-  height: 100vh;
+  height: 130vh;
   background: transparent;
-  background: black;
-  transform: translateY(-290px) translateX(-118px);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(62, 62, 62, 1) 49%,
+    rgba(103, 103, 103, 1) 100%
+  );
+  transform: translateY(-180px) translateX(-118px);
   box-shadow: 1px 10px 10 px 1px #a3cef1;
 }
 .text {
@@ -76,7 +80,6 @@ export default {
   flex-direction: space-between;
 }
 body {
-  background-color: black;
   width: 100%;
   height: 180vh;
 }
@@ -112,10 +115,13 @@ img {
   font-weight: bold;
 }
 .btn-login {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 900;
 }
-
+.btn-login:hover {
+  border-radius: 90px;
+  border: 2px solid #7388d4;
+}
 .logo .subtitle {
   font-size: 12px;
   font-style: italic;
