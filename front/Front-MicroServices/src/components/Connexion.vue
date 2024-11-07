@@ -1,3 +1,93 @@
+<script>
+import Products from "./Products.vue";
+import router from "../router";
+export default {
+  props: [
+    "setIsLoggedIn",
+    "setToken",
+    "setUserId",
+    "setIsLoggedIn",
+    "setToken",
+    "setUserId",
+  ],
+
+  data() {
+    return {
+      email: "",
+      password: "",
+      isAdmin: "false",
+    };
+  },
+  methods: {
+    async handleSubmitRegister() {
+      console.log("Email:", this.email);
+      console.log("Mot de passe:", this.password);
+      console.log("IsAdmin", this.isAdmin);
+      console.log("Compte créé");
+
+      try {
+        const response = await fetch("http://localhost:3001/users/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password,
+            isAdmin: this.isAdmin,
+          }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          this.setIsLoggedIn(true);
+          this.setToken(data.token);
+          localStorage.setItem("token", data.token);
+          this.setUserId(data.userId);
+          localStorage.setItem("userId", data.userId);
+
+          this.$router.push("/products");
+        } else {
+          alert(data.msg);
+        }
+      } catch (error) {
+        console.error("Erreur lors de l'inscription:", error);
+        alert("Erreur lors de l'inscription.");
+      }
+    },
+    async handleSubmitLogin() {
+      console.log("Email:", email);
+
+      try {
+        const response = await fetch("http://localhost:3001/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("connecté");
+          alert("Connexion réussie");
+          console.log("Utilisateur:", data);
+          setIsLoggedIn(true);
+          setToken(data.token); // Stockez le token
+          localStorage.setItem("token", data.token); // Stockez le token dans localStorage
+          setUserId(data.userId); // Stockez l'ID de l'utilisateur
+          localStorage.setItem("userId", data.userId); // Stockez l'ID de l'utilisateur dans localStorage
+        } else {
+          alert(data.msg);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la connexion:", error);
+        alert("Erreur lors de la connexion.");
+      }
+    },
+  },
+};
+</script>
+
 <template>
   <div class="container">
     <h1 class="page-title">Ecommerce</h1>
@@ -25,7 +115,13 @@
               v-model1="password"
             />
           </div>
-          <button type="submit" class="login-button">Se connecter</button>
+          <button
+            type="submit"
+            @click.prevent="handleSubmitLogin()"
+            class="login-button"
+          >
+            Se connecter
+          </button>
         </form>
       </div>
       <div class="login-card">
@@ -58,59 +154,18 @@
               <input type="checkbox" id="checkbox" v-model="checked" />
             </label>
           </div>
-          <button type="submit" class="login-button">Créer votre compte</button>
+          <button
+            type="button"
+            @click.prevent="handleSubmitRegister()"
+            class="login-button"
+          >
+            Créer votre compte
+          </button>
         </form>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: ["setIsLoggedIn", "setToken", "setUserId"],
-  data() {
-    return {
-      email: "",
-      password: "",
-      isAdmin: "false",
-    };
-  },
-  methods: {
-    async handleSubmit() {
-      console.log("Email:", this.email);
-      console.log("Mot de passe:", this.password);
-      console.log("IsAdmin", this.isAdmin);
-      console.log("Compte créé");
-
-      try {
-        const response = await fetch("http://localhost:3001/users/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password,
-            isAdmin: this.isAdmin,
-          }),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          this.setIsLoggedIn(true);
-          this.setToken(data.token);
-          localStorage.setItem("token", data.token);
-          this.setUserId(data.userId);
-          localStorage.setItem("userId", data.userId);
-        } else {
-          alert(data.msg);
-        }
-      } catch (error) {
-        console.error("Erreur lors de l'inscription:", error);
-        alert("Erreur lors de l'inscription.");
-      }
-    },
-  },
-};
-</script>
 
 <style scoped>
 * {

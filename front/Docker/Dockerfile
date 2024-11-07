@@ -2,11 +2,10 @@ FROM node:lts-slim
 
 WORKDIR /home/node/app
 
-COPY ./package*.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY . .
+COPY . .  
 
 EXPOSE 5173
-
-CMD ["npm", "run"]
+CMD ["npm", "run", "dev"]
