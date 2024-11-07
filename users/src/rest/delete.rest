@@ -1,8 +1,8 @@
 ### Delete User
 POST http://localhost:3001/users/delete
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MWY3NDdmNjIyNDk3OWVlNjZjNTJkYiIsInJvbGUiOnRydWUsImlhdCI6MTczMDExNDczNywiZXhwIjoxNzMwMTE4MzM3fQ.XXjup1at7FktqbKEUEeqOHrxV-CI_JPI-xbY4H-ZlKc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmM5M2EwNDMwNTI3NmMwOWIzOWUyOSIsInJvbGUiOnRydWUsImlhdCI6MTczMDk3NDcwNCwiZXhwIjoxNzMwOTc4MzA0fQ.dikJ35vmodbEshbOL7SMgUWu3d7nv3ZJfRVL2pz7qq4
 
 {
-  "_id": "671f747f6224979ee66c52db"
+  "_id": "672c93a04305276c09b39e29"
 }
