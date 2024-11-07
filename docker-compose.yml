@@ -99,7 +99,7 @@ services:
       context: ./api-gateway
       dockerfile: Docker/node/Dockerfile
     ports:
-      - "3005:30005"
+      - "3005:3005"
     volumes:
       - ./api-gateway:/home/node/app
       - /home/node/app/node_modules

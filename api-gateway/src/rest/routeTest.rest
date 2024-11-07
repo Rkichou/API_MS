@@ -1,0 +1,23 @@
+### Test for Users Service
+GET http://localhost:3005
+Content-Type: application/json
+
+###
+
+### Test for Orders Service
+GET http://localhost:3005/orders
+Content-Type: application/json
+
+###
+
+### Test for Products Service
+GET http://localhost:3005/products
+Content-Type: application/json
+
+###
+
+### Test for Cart Service
+GET http://localhost:3005/cart
+Content-Type: application/json
+
+###
