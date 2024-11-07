@@ -39,10 +39,10 @@ services:
   front:
     build:
       context: ./front
-      dockerfile: Docker/Dockerfile
+      dockerfile: Docker/node/Dockerfile
     command: npm run dev
     ports:
-      - "5173:5173"
+      - "5173:8080"
     volumes:
       - ./front:/home/node/app
       - /home/node/app/node_modules
