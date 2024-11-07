@@ -17,6 +17,8 @@ const PORT = process.env.PORTGATEWAY || 3005;
 app.use(cors());
 app.use(express.json());
 
+setupSwagger(app);
+
 // Routes vers les microservices
 app.use("/users", handleUsersRequest);
 app.use("/orders", handleOrdersRequest);
