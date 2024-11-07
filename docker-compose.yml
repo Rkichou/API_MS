@@ -94,6 +94,18 @@ services:
     networks:
       - app-network
       
+  apigateway-service:
+    build:
+      context: ./api-gateway
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3005:30005"
+    volumes:
+      - ./api-gateway:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+
 volumes:
   user-db-data:
   cart-db-data:
