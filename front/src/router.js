@@ -1,10 +1,10 @@
-import Products from "./components/Products.vue";
-import Connexion from "./components/Connexion.vue";
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
-  { path: "/", component: () => import("./components/Connexion.vue") },
+  { path: "/login", component: () => import("./components/Login.vue") },
 
   { path: "/products", component: () => import("./components/Products.vue") },
+  { path: "/", component: () => import("./components/bouton.vue") },
+  { path: "/register", component: () => import("./components/Register.vue") },
 ];
 
 const router = createRouter({

@@ -53,37 +53,6 @@ export default {
         alert("Erreur lors de l'inscription.");
       }
     },
-    async handleSubmitLogin() {
-      console.log("Email:", email);
-
-      try {
-        const response = await fetch("http://localhost:3001/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          console.log("connecté");
-          alert("Connexion réussie");
-          console.log("Utilisateur:", data);
-          setIsLoggedIn(true);
-          setToken(data.token); // Stockez le token
-          localStorage.setItem("token", data.token); // Stockez le token dans localStorage
-          setUserId(data.userId); // Stockez l'ID de l'utilisateur
-          localStorage.setItem("userId", data.userId); // Stockez l'ID de l'utilisateur dans localStorage
-        } else {
-          alert(data.msg);
-        }
-      } catch (error) {
-        console.error("Erreur lors de la connexion:", error);
-        alert("Erreur lors de la connexion.");
-      }
-    },
   },
 };
 </script>
@@ -91,78 +60,43 @@ export default {
 <template>
   <div class="container">
     <h1 class="page-title">Ecommerce</h1>
-    <div class="login-page">
-      <div class="login-card">
-        <h2>Connexion</h2>
-        <form>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              required
-              placeholder="Entrez votre email"
-              v-model1="email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input
-              type="password"
-              id="password"
-              required
-              placeholder="Entrez votre mot de passe"
-              v-model1="password"
-            />
-          </div>
-          <button
-            type="submit"
-            @click.prevent="handleSubmitLogin()"
-            class="login-button"
-          >
-            Se connecter
-          </button>
-        </form>
-      </div>
-      <div class="login-card">
-        <h2>Création de compte</h2>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label for="registerEmail">Email</label>
-            <input
-              type="email"
-              id="registerEmail"
-              required
-              placeholder="Entrez votre email"
-              v-model="email"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="registerPassword">Mot de passe</label>
-            <input
-              type="password"
-              id="registerPassword"
-              required
-              placeholder="Entrez votre mot de passe"
-              v-model="password"
-            />
-          </div>
-          <div class="form-group">
-            <label for="checkbox"
-              >IsAdmin
-              <input type="checkbox" id="checkbox" v-model="checked" />
-            </label>
-          </div>
-          <button
-            type="button"
-            @click.prevent="handleSubmitRegister()"
-            class="login-button"
-          >
-            Créer votre compte
-          </button>
-        </form>
-      </div>
+    <div class="login-card">
+      <h2>Création de compte</h2>
+      <form @submit.prevent="handleSubmit">
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            required
+            placeholder="Entrez votre email"
+            v-model="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Mot de passe</label>
+          <input
+            type="password"
+            id="registerPassword"
+            required
+            placeholder="Entrez votre mot de passe"
+            v-model="password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="checkbox"
+            >IsAdmin
+            <input type="checkbox" id="checkbox" v-model="checked" />
+          </label>
+        </div>
+        <button
+          type="button"
+          @click.prevent="handleSubmitRegister()"
+          class="login-button"
+        >
+          Créer votre compte
+        </button>
+      </form>
     </div>
   </div>
 </template>
