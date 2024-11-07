@@ -90,69 +90,90 @@ Content-Type: application/json
 # Remove item from cart
 DELETE http://localhost:3005/cart/remove
 Content-Type: application/json
+
 {
     "user_id": "12345",
     "product_id": "abcde"
 }
 
+###
+
 # Update item quantity in cart
 PUT http://localhost:3005/cart/update
 Content-Type: application/json
+
 {
     "user_id": "12345",
     "product_id": "abcde",
     "quantity": 5
 }
 
+### 
+
 # Get cart for a specific user
 GET http://localhost:3005/cart/user/12345
+
+###
 
 # Clear cart for a specific user
 DELETE http://localhost:3005/cart/clear/12345
 
+###
+
 # Get all carts
 GET http://localhost:3005/cart/all
+
+###
 
 ### Test Order Routes through API Gateway
 # Create a new order
 POST http://localhost:3005/orders/create
 Content-Type: application/json
+
 {
-    "userId": "12345",
-    "items": [
-        {
-            "productId": "abcde",
-            "quantity": 2,
-            "price": 19.99
-        },
-        {
-            "productId": "fghij",
-            "quantity": 1,
-            "price": 9.99
-        }
-    ],
-    "totalAmount": 49.97
+  "user_id": "60d0fe4f5311236168a109ca",
+  "items": [
+    {
+      "productId": "60d0fe4f5311236168a109cb",
+      "quantity": 2,
+      "price": 20.00
+    }
+  ],
+  "totalAmount": 40.00,
+  "status": "pending"
 }
+
+###
 
 # Get all orders
 GET http://localhost:3005/orders
 
+###
+
 # Get an order by ID
-GET http://localhost:3005/orders/6720ff7f13feb01ffe4e2b94
+GET http://localhost:3005/orders/672ca43c72b44d3417681547
+
+###
 
 # Update the status of an order
-PUT http://localhost:3005/orders/update/6720ff7f13feb01ffe4e2b94
+PUT http://localhost:3005/orders/update/672ca43c72b44d3417681547
 Content-Type: application/json
+
 {
     "status": "shipped"
 }
 
+###
+
 # Cancel an order
-PUT http://localhost:3005/orders/cancel/6720ff7f13feb01ffe4e2b94
+PUT http://localhost:3005/orders/cancel/672ca43c72b44d3417681547
 Content-Type: application/json
+
 {
     "status": "cancelled"
 }
 
+###
+
 # Delete an order
-DELETE http://localhost:3005/orders/6720ff7f13feb01ffe4e2b94
+DELETE http://localhost:3005/orders/672ca4e797534a2c1a1aabcf

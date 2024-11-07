@@ -12,7 +12,7 @@ setupSwagger(app);
 app.use(express.json());
 
 // Routes
-app.use("/api/orders", OrderRoutes);
+app.use("/orders", OrderRoutes);
 
 // Connect to the database and start the server
 const startServer = async () => {
