@@ -62,13 +62,13 @@ export default {
 .container {
   width: 1940px;
   height: 130vh;
-  background: transparent;
-  background: linear-gradient(
+  background: black;
+  /* background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
     rgba(62, 62, 62, 1) 49%,
     rgba(103, 103, 103, 1) 100%
-  );
+  ); */
   transform: translateY(-180px) translateX(-118px);
   box-shadow: 1px 10px 10 px 1px #a3cef1;
 }
@@ -82,6 +82,7 @@ export default {
 body {
   width: 100%;
   height: 180vh;
+  background: black;
 }
 .menu,
 .btn-login,
