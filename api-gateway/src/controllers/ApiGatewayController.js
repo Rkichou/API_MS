@@ -13,7 +13,7 @@ import axios from "axios";
  *         description: Internal server error
  */
 export const handleUsersRequest = (req, res) => {
-  proxyRequest(req, res, "http://localhost:3001");
+  proxyRequest(req, res, "http://user-service:3001");
 };
 
 /**
@@ -28,7 +28,7 @@ export const handleUsersRequest = (req, res) => {
  *         description: Internal server error
  */
 export const handleOrdersRequest = (req, res) => {
-  proxyRequest(req, res, "http://localhost:3000");
+  proxyRequest(req, res, "http://order-service:3000");
 };
 
 /**
@@ -43,7 +43,7 @@ export const handleOrdersRequest = (req, res) => {
  *         description: Internal server error
  */
 export const handleProductsRequest = (req, res) => {
-  proxyRequest(req, res, "http://localhost:3002");
+  proxyRequest(req, res, "http://products-service:3002");
 };
 
 /**
@@ -58,7 +58,7 @@ export const handleProductsRequest = (req, res) => {
  *         description: Internal server error
  */
 export const handleCartRequest = (req, res) => {
-  proxyRequest(req, res, "http://localhost:3003");
+  proxyRequest(req, res, "http://cart_service:3003");
 };
 
 const proxyRequest = async (req, res, targetUrl) => {
@@ -67,6 +67,10 @@ const proxyRequest = async (req, res, targetUrl) => {
       method: req.method,
       url: `${targetUrl}${req.originalUrl}`,
       data: req.body,
+      headers: {
+        Authorization: req.header("Authorization"),
+        "Content-Type": req.header("Content-Type"),
+      },
     });
     res.status(response.status).json(response.data);
   } catch (error) {
