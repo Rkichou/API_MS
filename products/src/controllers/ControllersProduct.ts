@@ -14,6 +14,7 @@ import { Request, Response } from "express";
  *         - description
  *         - disponibilite
  *         - categorie
+ *         - tags
  *       properties:
  *         _id:
  *           type: string
@@ -33,6 +34,11 @@ import { Request, Response } from "express";
  *         categorie:
  *           type: string
  *           description: La catégorie du produit
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: Les tags associés au produit
  */
 
 /**
@@ -97,14 +103,22 @@ const productById = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: "Produit non trouvé" });
       return;
     }
-    res.json(product);
+
+    const similarProducts = await Products.find({
+      $or: [
+        { categorie: { $in: product.tags } },        // Produits dont la catégorie correspond à l'un des tags du produit actuel
+      ],
+      _id: { $ne: product._id }                       // Exclure le produit actuel
+    }).limit(5);  
+
+    // Retourne à la fois le produit et les recommandations
+    res.json({ product, recommendations: similarProducts });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la récupération du produit", error });
-    return;
+    res.status(500).json({ message: "Erreur lors de la récupération du produit", error });
   }
 };
+
+
 
 /**
  * @swagger
@@ -126,7 +140,7 @@ const productById = async (req: Request, res: Response): Promise<void> => {
  */
 const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie, image } =
+    const { _id, price, name, description, disponibilite, categorie, image, tags } =
       req.body;
     const product = new Products({
       _id,
@@ -136,16 +150,15 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
       disponibilite,
       categorie,
       image,
+      tags
     });
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la création du produit", error });
-    return;
+    res.status(500).json({ message: "Erreur lors de la création du produit", error });
   }
 };
+
 
 /**
  * @swagger
@@ -225,7 +238,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
  */
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie, image } =
+    const { _id, price, name, description, disponibilite, categorie, image, tags } =
       req.body;
     const product = await Products.findByIdAndUpdate(
       req.params.id,
@@ -237,6 +250,7 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
         disponibilite,
         categorie,
         image,
+        tags
       },
       { new: true }
     );

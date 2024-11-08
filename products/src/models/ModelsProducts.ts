@@ -8,6 +8,7 @@ interface Product extends Document {
   disponibilite: Boolean;
   categorie: String;
   image: String;
+  tags: string[];
 }
 
 const ProductSchema: Schema = new Schema({
@@ -18,6 +19,7 @@ const ProductSchema: Schema = new Schema({
   disponibilite: { type: Boolean, required: true },
   categorie: { type: String, required: true },
   image: { type: String, required: true },
+  tags: { type: [String], required: true }, 
 });
 
 const ProductsModel = model<Product>("Product", ProductSchema);
