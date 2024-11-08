@@ -41,10 +41,10 @@ export default {
 
 <style scoped>
 .footer {
-  width: 1520px;
+  width: auto;
   background: #274c77;
   color: #ffffff;
-  padding: 40px 0;
+  padding-top: 40px;
 
   text-align: center;
 }
@@ -52,7 +52,6 @@ export default {
 .footer-content {
   display: flex;
   justify-content: space-between;
-  width: 200vh;
   margin: auto;
   flex-wrap: wrap;
 }
