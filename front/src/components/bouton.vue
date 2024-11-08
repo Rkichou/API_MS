@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <section class="container">
     <nav className="navbar">
       <div className="logo">
         <span>LOGO</span>
@@ -53,50 +53,60 @@ export default {
       </div>
     </div>
     <Footer />
-  </div>
+  </section>
 </template>
 
 <style scooped>
 .container {
-  background: black;
-  /* background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(62, 62, 62, 1) 49%,
-    rgba(103, 103, 103, 1) 100%
-  ); */
-  box-shadow: 1px 10px 10 px 1px #a3cef1;
+  background-image: url("../assets/img/background.jpg");
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
 }
 .text {
   color: white;
 }
-.cart div {
-  display: flex;
-  flex-direction: space-between;
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 12px;
+  font-style: italic;
+  color: #006d16;
+  display: block;
+}
+.btn-link {
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+}
+.btn-link:hover {
+  border-radius: 90px;
+  border: 2px solid #7388d4;
 }
 
-.menu,
-.btn-login,
-.btn-register {
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  font-size: 900;
-  margin-left: 100px;
-}
+/* Navbar styles */
 .navbar {
-  position: relative;
-
+  display: flex;
   justify-content: space-between;
-  align-items: start;
-  background-color: transparent;
+  align-items: center;
   padding: 10px 20px;
-  right: 120px;
+  background-color: transparent;
   color: white;
 }
-.navbar .menu {
+.menu {
   display: flex;
-  flex-direction: space-between;
+  gap: 20px;
+}
+.menu-toggle {
+  display: none;
+  background-color: #333;
+  color: white;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
 }
 img {
   mix-blend-mode: multiply; /* Essayer également avec 'darken' ou 'screen' selon les cas */
@@ -167,7 +177,6 @@ h1 {
   width: 170vh;
   height: 80vh;
   position: relative;
-  left: 100px;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -193,7 +202,6 @@ h1 {
     #7388d4,
     #2b2b47
   );
-  padding-left: 30px;
   border-radius: 35px;
   flex-direction: column;
   align-items: center;
