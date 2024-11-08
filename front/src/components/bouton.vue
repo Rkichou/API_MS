@@ -133,6 +133,7 @@ img {
   font-weight: 900;
   font-size: 28px;
   font-family: cursive;
+  text-decoration: none;
 }
 .logo .subtitle {
   font-size: 12px;
