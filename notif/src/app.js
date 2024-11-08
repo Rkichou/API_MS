@@ -1,13 +1,13 @@
-const express = require("express");
-const swaggerDocs = require("./config/Swagger"); // Chemin du fichier swagger.js
-const notifRoutes = require("./routes/notifRoutes");
-const connectDB = require("./config/db");
+import express, { json } from "express";
+import swaggerDocs from "./config/Swagger.js"; // Chemin du fichier swagger.js
+import notifRoutes from "./routes/notifRoutes.js";
+import connectDB from "./config/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3004;
 
 // Middleware
-app.use(express.json());
+app.use(json());
 
 // Connexion à la base de données
 connectDB();
