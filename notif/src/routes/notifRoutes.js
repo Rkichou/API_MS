@@ -1,9 +1,9 @@
-const express = require("express");
-const { sendEmail } = require("../controllers/notifController");
+import express from "express";
+import notifController from "../controllers/notifController.js";
 
 const router = express.Router();
 
 // Route pour envoyer un email
-router.post("/send", sendEmail);
+router.post("/send", notifController.sendEmail);
 
-module.exports = router;
+export default router;

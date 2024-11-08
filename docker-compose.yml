@@ -103,6 +103,12 @@ services:
     volumes:
       - ./api-gateway:/home/node/app
       - /home/node/app/node_modules
+    depends_on:
+      - user-service
+      - cart_service
+      - products-service
+      - order-service
+      - notif-service
     networks:
       - app-network
     

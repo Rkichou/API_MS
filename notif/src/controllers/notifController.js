@@ -1,11 +1,11 @@
-const nodemailer = require("nodemailer");
+import { createTransport } from "nodemailer";
 
 // Fonction pour envoyer un email
 const sendEmail = async (req, res) => {
   const { to, subject, text } = req.body;
 
   // Configurer le transporteur de mail
-  const transporter = nodemailer.createTransport({
+  const transporter = createTransport({
     service: "gmail",
     auth: {
       user: process.env.EMAIL_USER || "",
@@ -34,6 +34,6 @@ const sendEmail = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   sendEmail,
 };
