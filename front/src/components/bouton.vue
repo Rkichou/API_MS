@@ -12,7 +12,7 @@ export default {
   <section class="container">
     <nav className="navbar">
       <div className="logo">
-        <span>LOGO</span>
+        <span>GRAPHIXHUB</span>
         <span className="subtitle">A définir</span>
       </div>
 
@@ -31,7 +31,7 @@ export default {
     <div class="principal">
       <div class="annonce-right slide-fade-in">
         <h1 class="text">Carte Graphique</h1>
-        <router-link to="/products" class="btn-login"
+        <router-link to="/products" class="btn-login1"
           >Learn More ->
         </router-link>
         <img src="../assets/p3.jpeg" />
@@ -40,13 +40,13 @@ export default {
         <img src="../assets/p5.jpeg" />
 
         <h1 class="text">Processeur</h1>
-        <router-link to="/products" class="btn-login"
+        <router-link to="/products" class="btn-login1"
           >Learn More ->
         </router-link>
       </div>
       <div class="annonce-right uno slide-fade-in">
         <h1 class="text">Tour Ordi</h1>
-        <router-link to="/products" class="btn-login"
+        <router-link to="/products" class="btn-login1"
           >Learn More ->
         </router-link>
         <img src="../assets/p4.jpeg" />
@@ -63,6 +63,10 @@ export default {
   margin: 0;
   width: auto;
   height: auto;
+}
+span {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .text {
   color: white;
@@ -116,12 +120,19 @@ img {
   font-weight: bold;
 }
 .btn-login {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 900;
+  color: rgb(175, 174, 174);
+  text-decoration: none;
 }
 .btn-login:hover {
-  border-radius: 90px;
-  border: 2px solid #7388d4;
+  font-size: 28px;
+  color: rgb(105, 0, 196);
+}
+.btn-login1 {
+  font-weight: 900;
+  font-size: 28px;
+  font-family: cursive;
 }
 .logo .subtitle {
   font-size: 12px;
@@ -170,18 +181,38 @@ img {
     right: 10px;
   }
 }
+@media (max-width: 480px) {
+  .menu a {
+    font-size: 14px; /* Réduire la taille de police */
+    padding: 8px 15px; /* Ajuster les marges */
+  }
+
+  .menu-toggle {
+    font-size: 26px; /* Réduire la taille du bouton */
+    padding: 4px 8px;
+  }
+
+  .user-cart {
+    top: 8px;
+    right: 8px;
+  }
+
+  .menu {
+    top: 40px; /* Ajuste la position du menu déroulant pour éviter les chevauchements */
+  }
+}
 h1 {
   color: purple;
 }
 .principal {
-  width: 170vh;
-  height: 80vh;
   position: relative;
   align-items: center;
   display: flex;
   flex-direction: row;
-
-  align-items: center;
+}
+.annonce-right:hover,
+.annonce-left:hover {
+  box-shadow: 20px 3px 3px 3px rgb(181, 181, 181);
 }
 .principal div {
   margin: 40px;
@@ -190,8 +221,11 @@ h1 {
   flex-direction: column;
   justify-content: space-around;
 }
+
 .annonce-right,
 .annonce-left {
+  transform: scale(1.1);
+  position: relative;
   width: 200vh;
   height: 65vh;
   box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
@@ -209,6 +243,7 @@ h1 {
   text-align: center;
   font-size: 300;
 }
+
 .uno {
   background: radial-gradient(
     circle at 30% 30%,
