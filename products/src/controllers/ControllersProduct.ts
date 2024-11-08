@@ -140,7 +140,8 @@ const productById = async (req: Request, res: Response): Promise<void> => {
  */
 const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie, tags } = req.body;
+    const { _id, price, name, description, disponibilite, categorie, image, tags } =
+      req.body;
     const product = new Products({
       _id,
       price,
@@ -148,7 +149,8 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
       description,
       disponibilite,
       categorie,
-      tags,  // Utiliser le champ tags
+      image,
+      tags
     });
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
@@ -198,10 +200,12 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     }
 
     console.log("Produit supprimé avec succès");
-    res.status(201).json({message: "Produit supprimé avec succès"});
+    res.status(201).json({ message: "Produit supprimé avec succès" });
   } catch (error) {
     console.error("Erreur lors de la suppression du produit:", error);
-    res.status(500).json({ message: "Erreur lors de la suppression du produit", error });
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la suppression du produit", error });
   }
 };
 
@@ -234,7 +238,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
  */
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie,tags } =
+    const { _id, price, name, description, disponibilite, categorie, image, tags } =
       req.body;
     const product = await Products.findByIdAndUpdate(
       req.params.id,
@@ -245,7 +249,8 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
         description,
         disponibilite,
         categorie,
-        tags,
+        image,
+        tags
       },
       { new: true }
     );
@@ -253,7 +258,9 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: "Erreur lors de la mise à jour" });
       return;
     }
-    res.status(201).json({ message: "Produit mis à jour avec succès", product });
+    res
+      .status(201)
+      .json({ message: "Produit mis à jour avec succès", product });
   } catch (error) {
     res
       .status(500)

@@ -1,5 +1,4 @@
 services:
-
   user-service:
     build:
       context: ./users
@@ -15,7 +14,7 @@ services:
       - user-db
 
   user-db:
-    image: mongo:latest 
+    image: mongo:latest
     container_name: user-mongo
     ports:
       - "27017:27017"
@@ -47,7 +46,7 @@ services:
       - cart-db-data:/data/db
     networks:
       - app-network
-  
+
   products-service:
     build:
       context: ./products
@@ -84,7 +83,7 @@ services:
       - order-db
     networks:
       - app-network
-  
+
   order-db:
     image: mongo:latest
     ports:
@@ -93,7 +92,7 @@ services:
       - order-db-data:/data/db
     networks:
       - app-network
-      
+
   apigateway-service:
     build:
       context: ./api-gateway
