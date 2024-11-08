@@ -58,163 +58,179 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <h1 class="page-title">Ecommerce</h1>
-    <div class="login-card">
-      <h2>Création de compte</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="registerEmail">Email</label>
-          <input
-            type="email"
-            id="registerEmail"
-            required
-            placeholder="Entrez votre email"
-            v-model="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="registerPassword">Mot de passe</label>
-          <input
-            type="password"
-            id="registerPassword"
-            required
-            placeholder="Entrez votre mot de passe"
-            v-model="password"
-          />
-        </div>
-        <div class="form-group">
-          <label for="checkbox"
-            >IsAdmin
-            <input type="checkbox" id="checkbox" v-model="checked" />
-          </label>
-        </div>
-        <button
-          type="button"
-          @click.prevent="handleSubmitRegister()"
-          class="login-button"
-        >
-          Créer votre compte
-        </button>
-      </form>
+  <section class="landing_page">
+    <img src="../assets/img/background.jpg" alt="background">
+    <div class="navbar">
+      <img src="../assets/img/logo.png" alt="logo">
+      <h1>GraphiXHub</h1>
     </div>
-  </div>
+    <div class="container">
+      <div class="login-card">
+        <button class="icon-button">
+          <i class="fi fi-ss-enter"></i> 
+        </button>
+        <h2>Création de compte</h2>
+        <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
+        <form @submit.prevent="handleSubmit">
+          <div class="form-group">
+            <label for="registerEmail"></label>
+            <input type="email" id="registerEmail" required placeholder="Email" v-model="email" />
+            <i class="fi fi-ss-envelope"></i>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword"></label>
+            <input type="password" id="registerPassword" required placeholder="Mot de passe" v-model="password" />
+            <i class="fi fi-ss-lock"></i>
+          </div>
+          <div class="form-group">
+            <label for="checkbox">IsAdmin
+              <input type="checkbox" id="checkbox" v-model="checked" />
+            </label>
+          </div>
+          <button type="button" @click.prevent="handleSubmitRegister()" class="login-button">
+            Créer votre compte
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.landing_page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing_page img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
 .container {
-  background-color: #69c3fa;
-  height: 100%;
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 30px;
+  height: 500px;
+  max-width: 400px;
   width: 100%;
-  padding: 2em;
-}
-
-.login-page {
-  background-color: #f0f4f8;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
-  height: auto;
-  width: 100%;
-  padding: 1em;
-}
-
-.login-card {
-  background-color: #ffffff;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
+  z-index: 1;
 }
 
-h2 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 1em;
+
+.icon-button {
+  background-color: #fff;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  margin-bottom: 30px;
+  transform: rotate(180deg);
+  font-size: 35px;
+}
+
+
+.login-card h2 {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.login-card h5 {
+  margin-bottom: 25px;
+  font-weight: 400;
+  color: grey;
+  padding: auto;
 }
 
 .form-group {
-  margin-bottom: 1.5em;
-  text-align: left;
-}
-
-label {
-  color: #555;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-  display: block;
-}
-
-input[type="email"],
-input[type="password"] {
+  margin-bottom: 25px;
+  display: inline-flex;
+  align-items: center;
   width: 100%;
-  padding: 0.75em;
-  border: 1px solid #000000;
-  border-radius: 8px;
-  background-color: #000000;
-  font-size: 16px;
-  transition: border-color 0.3s;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 13px;
+  padding-left: 30px;
+  border: none;
+  background-color: #f0f2f5;
+  border-radius: 15px;
+}
+
+.form-group i {
+  font-size: 12px; 
+  margin-left: -350px; 
+  color: #777;
+  padding: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-button {
   width: 100%;
-  padding: 0.75em;
-  font-size: 16px;
-  background-color: #69c3fa;
-  color: #ffffff;
+  padding: 10px;
+  background-color: #2b2c36;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: bold;
 }
 
-.login-button:hover {
-  background-color: #4338ca;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: -2;
 }
 
-/* Styles responsives */
-@media (max-width: 768px) {
-  .page-title {
-    font-size: 24px;
-  }
-
-  .login-page {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .login-card {
-    width: 90%;
-    max-width: 400px;
-  }
+.navbar h1 {
+  font-size: 18px;
+  padding-left: 50px;
+  color: #fff;
 }
 
-@media (max-width: 480px) {
-  .page-title {
-    font-size: 20px;
-  }
-
-  .login-card {
-    padding: 1.5em;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  .login-button {
-    font-size: 14px;
-  }
+.navbar img {
+  width: 80px;
 }
 </style>
