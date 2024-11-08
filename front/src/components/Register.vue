@@ -58,53 +58,12 @@ export default {
 </script>
 
 <template>
-<<<<<<< HEAD
+
   <section class="landing_page">
     <img src="../assets/img/background.jpg" alt="background">
     <div class="navbar">
       <img src="../assets/img/logo.png" alt="logo">
       <h1>GraphiXHub</h1>
-=======
-  <div class="container">
-    <h1 class="page-title">Register</h1>
-    <div class="login-card">
-      <h2>Création de compte</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="registerEmail">Email</label>
-          <input
-            type="email"
-            id="registerEmail"
-            required
-            placeholder="Entrez votre email"
-            v-model="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="registerPassword">Mot de passe</label>
-          <input
-            type="password"
-            id="registerPassword"
-            required
-            placeholder="Entrez votre mot de passe"
-            v-model="password"
-          />
-        </div>
-        <div class="form-group">
-          <label for="checkbox"
-            >IsAdmin
-            <input type="checkbox" id="checkbox" v-model="checked" />
-          </label>
-        </div>
-        <button
-          type="button"
-          @click.prevent="handleSubmitRegister()"
-          class="login-button"
-        >
-          Créer votre compte
-        </button>
-      </form>
->>>>>>> refs/remotes/origin/front
     </div>
     <div class="container">
       <div class="login-card">
@@ -174,7 +133,6 @@ html {
 }
 
 .container {
-<<<<<<< HEAD
   position: relative;
   background-color: #fff;
   padding: 20px;
@@ -182,7 +140,6 @@ html {
   height: 500px;
   max-width: 400px;
   width: 100%;
-=======
   background-color: #000000;
   height: 100%;
   width: 100%;
@@ -208,7 +165,6 @@ html {
   padding: 2em;
   border-radius: 10px;
   box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
->>>>>>> refs/remotes/origin/front
   text-align: center;
   z-index: 1;
 }

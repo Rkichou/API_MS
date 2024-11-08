@@ -1,14 +1,8 @@
 <script>
-import Products from "./Products.vue";
-import router from "../router";
-
 import { useRouter } from "vue-router";
 
 export default {
   props: [
-    "setIsLoggedIn",
-    "setToken",
-    "setUserId",
     "setIsLoggedIn",
     "setToken",
     "setUserId",
@@ -27,7 +21,6 @@ export default {
       console.log("Email:", this.email);
       console.log("Mot de passe:", this.password);
       console.log("IsAdmin", this.isAdmin);
-      console.log("Compte créé");
 
       try {
         const response = await fetch("http://localhost:3001/users/register", {
@@ -48,6 +41,7 @@ export default {
           this.setUserId(data.userId);
           localStorage.setItem("userId", data.userId);
 
+          // Navigation après succès
           this.$router.push("/products");
         } else {
           alert(data.msg);
@@ -57,8 +51,9 @@ export default {
         alert("Erreur lors de l'inscription.");
       }
     },
+
     async handleSubmitLogin() {
-      console.log("Email:", email);
+      console.log("Email:", this.email);
 
       try {
         const response = await fetch("http://localhost:3001/users/login", {
@@ -66,7 +61,10 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password,
+          }),
         });
 
         const data = await response.json();
@@ -75,11 +73,14 @@ export default {
           console.log("connecté");
           alert("Connexion réussie");
           console.log("Utilisateur:", data);
-          setIsLoggedIn(true);
-          setToken(data.token); // Stockez le token
-          localStorage.setItem("token", data.token); // Stockez le token dans localStorage
-          setUserId(data.userId); // Stockez l'ID de l'utilisateur
-          localStorage.setItem("userId", data.userId); // Stockez l'ID de l'utilisateur dans localStorage
+          this.setIsLoggedIn(true);
+          this.setToken(data.token);
+          localStorage.setItem("token", data.token);
+          this.setUserId(data.userId);
+          localStorage.setItem("userId", data.userId);
+
+          // Navigation après succès
+          this.$router.push("/products");
         } else {
           alert(data.msg);
         }
@@ -92,7 +93,6 @@ export default {
 };
 </script>
 
-
 <template>
   <section class="landing_page">
     <img src="../assets/img/background.jpg" alt="background">
@@ -100,59 +100,51 @@ export default {
       <img src="../assets/img/logo.png" alt="logo">
       <h1>GraphiXHub</h1>
     </div>
-  <div class="container">
-<<<<<<< HEAD
-    <div class="login-card">
+    <div class="container">
+      
+
+      <div class="login-card">
         <div class="icon-button">
           <i class="fi fi-ss-enter"></i>
-          <router-link to="/register" class="text"> Login </router-link>
+          <router-link to="/register" class="text">Login</router-link>
         </div>
-=======
-    <h1 class="page-title">Login</h1>
-    <div class="login-page">
-      <div class="login-card">
->>>>>>> refs/remotes/origin/front
-        <h2>Connexion</h2>
-        <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
-        <form>
-          <div class="form-group">
-            <label for="email"></label>
-            <input
-              type="email"
-              id="email"
-              required
-              placeholder="Email"
-              v-model1="email"
-            />
-            <i class="fi fi-ss-envelope"></i>
-          </div>
-          <div class="form-group">
-            <label for="password"></label>
-            <input
-              type="password"
-              id="password"
-              required
-              placeholder="Mot de passe"
-              v-model1="password"
-            />
-            <i class="fi fi-ss-lock"></i>
-          </div>
-          <div type="submit"
-            @click.prevent="handleSubmitLogin()"
-            class="login-button">
-            <router-link to="/products">            Se connecter
-            </router-link>
-            
-          
-          </div>
-        </form>
+        <div class="login-page">
+          <h2>Connexion</h2>
+          <h5>Embarquez-vous dans l'univers du gaming haute performance !</h5>
+          <form @submit.prevent="handleSubmitLogin">
+            <div class="form-group">
+              <label for="email"></label>
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="Email"
+                v-model="email"
+              />
+              <i class="fi fi-ss-envelope"></i>
+            </div>
+            <div class="form-group">
+              <label for="password"></label>
+              <input
+                type="password"
+                id="password"
+                required
+                placeholder="Mot de passe"
+                v-model="password"
+              />
+              <i class="fi fi-ss-lock"></i>
+            </div>
+            <button type="submit" class="login-button">
+              Se connecter
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
 @import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
 
 * {
@@ -187,45 +179,31 @@ html {
 }
 
 .container {
-<<<<<<< HEAD
   position: relative;
-  background-color: #fff;
-  padding: 20px;
+  background-color: #000;
+  padding: 2em;
   border-radius: 30px;
-  height: 500px;
   max-width: 400px;
   width: 100%;
-=======
-  background-color: #000000;
-  height: 100%;
-  width: 100%;
-  padding: 2em;
-  position: relative;
-  left: 55px;
+  margin: auto;
 }
 
 .login-page {
   background-color: #f0f4f8;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
-  height: auto;
   width: 100%;
-  padding: 1em;
 }
 
 .login-card {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 2em;
   border-radius: 10px;
-  box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
->>>>>>> refs/remotes/origin/front
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  z-index: 1;
 }
-
 
 .icon-button {
   background-color: #fff;
@@ -238,36 +216,19 @@ html {
   align-items: center;
   justify-content: center;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
-  margin-bottom: 30px;
-  transform: rotate(180deg);
+  margin: 15px 0 30px;
   font-size: 35px;
 }
-.icon-button .text{
-  transform:rotate(-180deg);
-  list-style-type: none;
+
+.icon-button .text {
   text-decoration: none;
   color: black;
   padding: 5px;
 }
 
-
-.login-card h2 {
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.login-card h5 {
-  margin-bottom: 25px;
-  font-weight: 400;
-  color: grey;
-  padding: auto;
-}
-
 .form-group {
+  position: relative;
   margin-bottom: 25px;
-  display: inline-flex;
-  align-items: center;
   width: 100%;
 }
 
@@ -275,20 +236,19 @@ html {
 .form-group input[type="password"] {
   width: 100%;
   padding: 13px;
-  padding-left: 30px;
+  padding-left: 40px;
   border: none;
   background-color: #f0f2f5;
   border-radius: 15px;
 }
 
 .form-group i {
-  font-size: 12px; 
-  margin-left: -350px; 
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
   color: #777;
-  padding: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-button {
@@ -311,12 +271,11 @@ html {
   left: 0;
   width: 100%;
   padding: 10px 20px;
-  z-index: -2;
+  z-index: 1;
 }
 
 .navbar h1 {
   font-size: 18px;
-  padding-left: 50px;
   color: #fff;
 }
 
