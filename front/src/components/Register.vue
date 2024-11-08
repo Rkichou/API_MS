@@ -1,21 +1,63 @@
+<template>
+  <section class="landing-page">
+    <img
+      src="../assets/img/background.jpg"
+      alt="background"
+      class="background-image"
+    />
+    <nav class="navbar">
+      <img src="../assets/img/logo.png" alt="logo" class="logo" />
+      <h1>GraphiXHub</h1>
+    </nav>
+    <div class="container">
+      <div class="login-card">
+        <button class="icon-button">
+          <i class="fi fi-ss-enter"></i>
+        </button>
+        <h2>Création de compte</h2>
+        <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
+        <form @submit.prevent="handleSubmitRegister">
+          <div class="form-group">
+            <i class="fi fi-ss-envelope"></i>
+            <input
+              type="email"
+              id="registerEmail"
+              required
+              placeholder="Email"
+              v-model="email"
+            />
+          </div>
+          <div class="form-group">
+            <i class="fi fi-ss-lock"></i>
+            <input
+              type="password"
+              id="registerPassword"
+              required
+              placeholder="Mot de passe"
+              v-model="password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="checkbox">IsAdmin</label>
+            <input type="checkbox" id="checkbox" v-model="isAdmin" />
+          </div>
+          <button type="submit" class="login-button">Créer votre compte</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</template>
+
 <script>
-import Products from "./Products.vue";
 import router from "../router";
 export default {
-  props: [
-    "setIsLoggedIn",
-    "setToken",
-    "setUserId",
-    "setIsLoggedIn",
-    "setToken",
-    "setUserId",
-  ],
+  props: ["setIsLoggedIn", "setToken", "setUserId"],
 
   data() {
     return {
       email: "",
       password: "",
-      isAdmin: "false",
+      isAdmin: false,
     };
   },
   methods: {
@@ -57,64 +99,7 @@ export default {
 };
 </script>
 
-<template>
-  <section class="landing_page">
-    <img src="../assets/img/background.jpg" alt="background" />
-    <div class="navbar">
-      <img src="../assets/img/logo.png" alt="logo" />
-      <h1>GraphiXHub</h1>
-    </div>
-    <div class="container">
-      <div class="login-card">
-        <button class="icon-button">
-          <i class="fi fi-ss-enter"></i>
-        </button>
-        <h2>Création de compte</h2>
-        <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label for="registerEmail"></label>
-            <input
-              type="email"
-              id="registerEmail"
-              required
-              placeholder="Email"
-              v-model="email"
-            />
-            <i class="fi fi-ss-envelope"></i>
-          </div>
-          <div class="form-group">
-            <label for="registerPassword"></label>
-            <input
-              type="password"
-              id="registerPassword"
-              required
-              placeholder="Mot de passe"
-              v-model="password"
-            />
-            <i class="fi fi-ss-lock"></i>
-          </div>
-          <div class="form-group">
-            <label for="checkbox"
-              >IsAdmin
-              <input type="checkbox" id="checkbox" v-model="checked" />
-            </label>
-          </div>
-          <button
-            type="button"
-            @click.prevent="handleSubmitRegister()"
-            class="login-button"
-          >
-            Créer votre compte
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-</template>
-
 <style scoped>
-@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 
 * {
@@ -129,60 +114,63 @@ html {
   height: 100%;
 }
 
-.landing_page {
+.landing-page {
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-.landing_page img {
+.background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2;
+  z-index: -1;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 1;
+}
+
+.navbar h1 {
+  font-size: 18px;
+  padding-left: 50px;
+  color: #fff;
+}
+
+.navbar .logo {
+  width: 80px;
 }
 
 .container {
-  position: relative;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
-  border-radius: 30px;
-  height: 500px;
+  border-radius: 10px;
   max-width: 400px;
   width: 100%;
-  background-color: #000000;
-  height: 100%;
-  width: 100%;
-  padding: 2em;
-  position: relative;
-  left: 55px;
-}
-
-.login-page {
-  background-color: #f0f4f8;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
-  height: auto;
-  width: 100%;
-  padding: 1em;
+  z-index: 1;
 }
 
 .login-card {
   background-color: #ffffff;
   padding: 2em;
   border-radius: 10px;
-  box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  z-index: 1;
 }
 
 .icon-button {
@@ -195,7 +183,7 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
   margin-top: 15px;
   margin-bottom: 30px;
   transform: rotate(180deg);
@@ -211,31 +199,33 @@ html {
   margin-bottom: 25px;
   font-weight: 400;
   color: grey;
-  padding: auto;
 }
 
 .form-group {
   margin-bottom: 25px;
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
-  width: 100%;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #f0f2f5;
 }
 
 .form-group input[type="email"],
 .form-group input[type="password"] {
   width: 100%;
   padding: 13px;
-  padding-left: 30px;
+  padding-left: 40px;
   border: none;
-  background-color: #f0f2f5;
-  border-radius: 15px;
+  background-color: transparent;
+  outline: none;
 }
 
 .form-group i {
-  font-size: 12px;
-  margin-left: -350px;
+  position: absolute;
+  left: 10px;
+  font-size: 16px;
   color: #777;
-  padding: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -252,25 +242,23 @@ html {
   cursor: pointer;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 20px;
-  z-index: -2;
-}
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
 
-.navbar h1 {
-  font-size: 18px;
-  padding-left: 50px;
-  color: #fff;
-}
+  .login-card {
+    padding: 1em;
+  }
 
-.navbar img {
-  width: 80px;
+  .icon-button {
+    font-size: 25px;
+    padding: 5px 10px;
+  }
+
+  .login-button {
+    padding: 8px;
+    font-size: 14px;
+  }
 }
 </style>
