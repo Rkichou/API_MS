@@ -19,6 +19,7 @@
             height="30"
             alt="instagram"
           />
+          <p>INSTAGRAM</p>
           <img src="../assets/icons/twitter.png" widht="30" height="30" />
           <img src="../assets/icons/linkedin.png" widht="30" height="30" />
         </div>

@@ -41,7 +41,9 @@
             <label for="checkbox">IsAdmin</label>
             <input type="checkbox" id="checkbox" v-model="isAdmin" />
           </div>
-          <button type="submit" class="login-button">Créer votre compte</button>
+          <div class="login-button">
+            <router-link to="/products"> Cree votre compte</router-link>
+          </div>
         </form>
       </div>
     </div>

@@ -128,7 +128,9 @@ export default {
               />
               <i class="fi fi-ss-lock"></i>
             </div>
-            <button type="submit" class="login-button">Se connecter</button>
+            <div class="login-button">
+              <router-link to="/products"> Connectez vous</router-link>
+            </div>
           </form>
         </div>
       </div>
