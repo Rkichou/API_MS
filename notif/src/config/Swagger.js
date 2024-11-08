@@ -6,13 +6,13 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Cart API",
-      description: "API pour gérer le panier des utilisateurs",
+      title: "notif API",
+      description: "API pour gérer les notifications",
       version: "1.0.0",
     },
     servers: [
       {
-        url: "http://localhost:3003/api",
+        url: "http://localhost:3004/api",
       },
     ],
     components: {
