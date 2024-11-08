@@ -1,29 +1,26 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-section about">
-        <h2>À propos</h2>
-        <p>
-          Bienvenue sur notre plateforme de e-commerce. Nous vous proposons une
-          large sélection de produits de qualité pour répondre à tous vos
-          besoins.
-        </p>
-      </div>
       <div class="footer-section links">
         <h2>Liens utiles</h2>
         <ul>
           <li><router-link to="/">Accueil</router-link></li>
           <li><router-link to="/products">Produits</router-link></li>
-          <li><router-link to="/about">À propos</router-link></li>
-          <li><router-link to="/contact">Contact</router-link></li>
+          <li><router-link to="#">À propos</router-link></li>
+          <li><router-link to="#">Contact</router-link></li>
         </ul>
       </div>
       <div class="footer-section social">
         <h2>Suivez-nous</h2>
         <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <img
+            src="../assets/icons/instagram.png"
+            widht="30"
+            height="30"
+            alt="instagram"
+          />
+          <img src="../assets/icons/twitter.png" widht="30" height="30" />
+          <img src="../assets/icons/linkedin.png" widht="30" height="30" />
         </div>
       </div>
     </div>
@@ -41,10 +38,10 @@ export default {
 
 <style scoped>
 .footer {
-  width: 1520px;
+  width: auto;
   background: #274c77;
   color: #ffffff;
-  padding: 40px 0;
+  padding-top: 40px;
 
   text-align: center;
 }
@@ -52,7 +49,6 @@ export default {
 .footer-content {
   display: flex;
   justify-content: space-between;
-  width: 200vh;
   margin: auto;
   flex-wrap: wrap;
 }
@@ -77,9 +73,12 @@ export default {
 .footer-section ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column; /* Change en colonne */
+  align-items: center; /* Centre les éléments si besoin */
 }
 
-.footer-section ul li {
+.footer-section li {
   margin: 5px 0;
 }
 
@@ -92,14 +91,10 @@ export default {
 .footer-section ul li a:hover {
   color: #ffffff;
 }
-
-.social-icons a {
-  margin: 0 10px;
-  color: #a3cef1;
-  font-size: 20px;
-  transition: color 0.3s;
+.social-icons {
+  display: flex;
+  justify-content: space-evenly;
 }
-
 .social-icons a:hover {
   color: #ffffff;
 }
