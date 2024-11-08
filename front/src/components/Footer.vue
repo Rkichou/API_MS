@@ -1,27 +1,24 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-section about">
-        <h2>À propos</h2>
-        <p>
-          Bienvenue sur notre plateforme de e-commerce. Nous vous proposons une
-          large sélection de produits de qualité pour répondre à tous vos
-          besoins.
-        </p>
-      </div>
       <div class="footer-section links">
         <h2>Liens utiles</h2>
         <ul>
           <li><router-link to="/">Accueil</router-link></li>
           <li><router-link to="/products">Produits</router-link></li>
-          <li><router-link to="/about">À propos</router-link></li>
-          <li><router-link to="/contact">Contact</router-link></li>
+          <li><router-link to="#">À propos</router-link></li>
+          <li><router-link to="#">Contact</router-link></li>
         </ul>
       </div>
       <div class="footer-section social">
         <h2>Suivez-nous</h2>
         <div class="social-icons">
-          <img src="../assets/icons/instagram.png" widht="30" height="30" />
+          <img
+            src="../assets/icons/instagram.png"
+            widht="30"
+            height="30"
+            alt="instagram"
+          />
           <img src="../assets/icons/twitter.png" widht="30" height="30" />
           <img src="../assets/icons/linkedin.png" widht="30" height="30" />
         </div>
@@ -76,9 +73,12 @@ export default {
 .footer-section ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column; /* Change en colonne */
+  align-items: center; /* Centre les éléments si besoin */
 }
 
-.footer-section ul li {
+.footer-section li {
   margin: 5px 0;
 }
 
