@@ -101,11 +101,17 @@ export default {
       <h1>GraphiXHub</h1>
     </div>
   <div class="container">
+<<<<<<< HEAD
     <div class="login-card">
         <div class="icon-button">
           <i class="fi fi-ss-enter"></i>
           <router-link to="/register" class="text"> Login </router-link>
         </div>
+=======
+    <h1 class="page-title">Login</h1>
+    <div class="login-page">
+      <div class="login-card">
+>>>>>>> refs/remotes/origin/front
         <h2>Connexion</h2>
         <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
         <form>
@@ -181,6 +187,7 @@ html {
 }
 
 .container {
+<<<<<<< HEAD
   position: relative;
   background-color: #fff;
   padding: 20px;
@@ -188,6 +195,33 @@ html {
   height: 500px;
   max-width: 400px;
   width: 100%;
+=======
+  background-color: #000000;
+  height: 100%;
+  width: 100%;
+  padding: 2em;
+  position: relative;
+  left: 55px;
+}
+
+.login-page {
+  background-color: #f0f4f8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  height: auto;
+  width: 100%;
+  padding: 1em;
+}
+
+.login-card {
+  background-color: #ffffff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 10px 40px 3px rgba(0, 0, 0, 0.1);
+>>>>>>> refs/remotes/origin/front
   text-align: center;
   z-index: 1;
 }
