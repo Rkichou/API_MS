@@ -103,14 +103,43 @@ services:
     volumes:
       - ./api-gateway:/home/node/app
       - /home/node/app/node_modules
+    depends_on:
+      - user-service
+      - cart_service
+      - products-service
+      - order-service
+      - notif-service
     networks:
       - app-network
+    
+  notif-service:
+    build:
+      context: ./notif
+      dockerfile: Docker/Dockerfile
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./notif:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+
+  notif-db:
+    image: mongo:latest
+    ports:
+      - "27021:27017"
+    volumes:
+      - notif-db-data:/data/db
+    networks:
+      - app-network
+      
 
 volumes:
   user-db-data:
   cart-db-data:
   products-db-data:
   order-db-data:
+  notif-db-data:
 
 networks:
   app-network:

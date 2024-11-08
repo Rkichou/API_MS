@@ -9,3 +9,5 @@
 -cart-service: 3003:3003 -cart-mongo: 27020:27017
 
 -apigateway-service: 3005:3005
+
+-notif-service: 3004:3004
