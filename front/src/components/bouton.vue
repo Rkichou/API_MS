@@ -9,59 +9,55 @@ export default {
 </script>
 
 <template>
-  <body>
-    <div class="container">
-      <nav className="navbar">
-        <div className="logo">
-          <span>LOGO</span>
-          <span className="subtitle">A définir</span>
-        </div>
+  <div class="container">
+    <nav className="navbar">
+      <div className="logo">
+        <span>LOGO</span>
+        <span className="subtitle">A définir</span>
+      </div>
 
-        <div className="menu">
-          <div class="products">
-            <router-link to="/products" class="btn-login">Products</router-link>
-          </div>
-          <div class="cart-Login">
-            <router-link to="/login" class="btn-login">Login</router-link>
-          </div>
-          <div class="cart-register">
-            <router-link to="/register" class="btn-login">Register</router-link>
-          </div>
+      <div className="menu">
+        <div class="products">
+          <router-link to="/products" class="btn-login">Products</router-link>
         </div>
-      </nav>
-      <div class="principal">
-        <div class="annonce-right slide-fade-in">
-          <h1 class="text">Carte Graphique</h1>
-          <router-link to="/products" class="btn-login"
-            >Learn More ->
-          </router-link>
-          <img src="../assets/p3.jpeg" />
+        <div class="cart-Login">
+          <router-link to="/login" class="btn-login">Login</router-link>
         </div>
-        <div class="annonce-left slide-fade-in">
-          <img src="../assets/p5.jpeg" />
-
-          <h1 class="text">Processeur</h1>
-          <router-link to="/products" class="btn-login"
-            >Learn More ->
-          </router-link>
-        </div>
-        <div class="annonce-right uno slide-fade-in">
-          <h1 class="text">Tour Ordi</h1>
-          <router-link to="/products" class="btn-login"
-            >Learn More ->
-          </router-link>
-          <img src="../assets/p4.jpeg" />
+        <div class="cart-register">
+          <router-link to="/register" class="btn-login">Register</router-link>
         </div>
       </div>
-      <Footer />
+    </nav>
+    <div class="principal">
+      <div class="annonce-right slide-fade-in">
+        <h1 class="text">Carte Graphique</h1>
+        <router-link to="/products" class="btn-login"
+          >Learn More ->
+        </router-link>
+        <img src="../assets/p3.jpeg" />
+      </div>
+      <div class="annonce-left slide-fade-in">
+        <img src="../assets/p5.jpeg" />
+
+        <h1 class="text">Processeur</h1>
+        <router-link to="/products" class="btn-login"
+          >Learn More ->
+        </router-link>
+      </div>
+      <div class="annonce-right uno slide-fade-in">
+        <h1 class="text">Tour Ordi</h1>
+        <router-link to="/products" class="btn-login"
+          >Learn More ->
+        </router-link>
+        <img src="../assets/p4.jpeg" />
+      </div>
     </div>
-  </body>
+    <Footer />
+  </div>
 </template>
 
 <style scooped>
 .container {
-  width: 1940px;
-  height: 130vh;
   background: black;
   /* background: linear-gradient(
     to bottom,
@@ -69,7 +65,6 @@ export default {
     rgba(62, 62, 62, 1) 49%,
     rgba(103, 103, 103, 1) 100%
   ); */
-  transform: translateY(-180px) translateX(-118px);
   box-shadow: 1px 10px 10 px 1px #a3cef1;
 }
 .text {
@@ -79,11 +74,7 @@ export default {
   display: flex;
   flex-direction: space-between;
 }
-body {
-  width: 100%;
-  height: 180vh;
-  background: black;
-}
+
 .menu,
 .btn-login,
 .btn-register {
@@ -95,8 +86,7 @@ body {
 }
 .navbar {
   position: relative;
-  width: 199vh;
-  bottom: 22px;
+
   justify-content: space-between;
   align-items: start;
   background-color: transparent;
@@ -181,8 +171,7 @@ h1 {
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin: 50px;
-  padding-top: 30px;
+
   align-items: center;
 }
 .principal div {

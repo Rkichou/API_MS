@@ -2,11 +2,7 @@
 import { useRouter } from "vue-router";
 
 export default {
-  props: [
-    "setIsLoggedIn",
-    "setToken",
-    "setUserId",
-  ],
+  props: ["setIsLoggedIn", "setToken", "setUserId"],
 
   data() {
     return {
@@ -95,14 +91,12 @@ export default {
 
 <template>
   <section class="landing_page">
-    <img src="../assets/img/background.jpg" alt="background">
+    <img src="../assets/img/background.jpg" alt="background" />
     <div class="navbar">
-      <img src="../assets/img/logo.png" alt="logo">
+      <img src="../assets/img/logo.png" alt="logo" />
       <h1>GraphiXHub</h1>
     </div>
     <div class="container">
-      
-
       <div class="login-card">
         <div class="icon-button">
           <i class="fi fi-ss-enter"></i>
@@ -134,9 +128,7 @@ export default {
               />
               <i class="fi fi-ss-lock"></i>
             </div>
-            <button type="submit" class="login-button">
-              Se connecter
-            </button>
+            <button type="submit" class="login-button">Se connecter</button>
           </form>
         </div>
       </div>
@@ -145,13 +137,13 @@ export default {
 </template>
 
 <style scoped>
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body,

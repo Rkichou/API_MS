@@ -58,37 +58,53 @@ export default {
 </script>
 
 <template>
-
   <section class="landing_page">
-    <img src="../assets/img/background.jpg" alt="background">
+    <img src="../assets/img/background.jpg" alt="background" />
     <div class="navbar">
-      <img src="../assets/img/logo.png" alt="logo">
+      <img src="../assets/img/logo.png" alt="logo" />
       <h1>GraphiXHub</h1>
     </div>
     <div class="container">
       <div class="login-card">
         <button class="icon-button">
-          <i class="fi fi-ss-enter"></i> 
+          <i class="fi fi-ss-enter"></i>
         </button>
         <h2>Création de compte</h2>
         <h5>Embarquez vous dans l'univers du gaming haute performance !</h5>
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
             <label for="registerEmail"></label>
-            <input type="email" id="registerEmail" required placeholder="Email" v-model="email" />
+            <input
+              type="email"
+              id="registerEmail"
+              required
+              placeholder="Email"
+              v-model="email"
+            />
             <i class="fi fi-ss-envelope"></i>
           </div>
           <div class="form-group">
             <label for="registerPassword"></label>
-            <input type="password" id="registerPassword" required placeholder="Mot de passe" v-model="password" />
+            <input
+              type="password"
+              id="registerPassword"
+              required
+              placeholder="Mot de passe"
+              v-model="password"
+            />
             <i class="fi fi-ss-lock"></i>
           </div>
           <div class="form-group">
-            <label for="checkbox">IsAdmin
+            <label for="checkbox"
+              >IsAdmin
               <input type="checkbox" id="checkbox" v-model="checked" />
             </label>
           </div>
-          <button type="button" @click.prevent="handleSubmitRegister()" class="login-button">
+          <button
+            type="button"
+            @click.prevent="handleSubmitRegister()"
+            class="login-button"
+          >
             Créer votre compte
           </button>
         </form>
@@ -98,14 +114,14 @@ export default {
 </template>
 
 <style scoped>
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
-@import url('https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
+@import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body,
@@ -169,7 +185,6 @@ html {
   z-index: 1;
 }
 
-
 .icon-button {
   background-color: #fff;
   color: black;
@@ -186,7 +201,6 @@ html {
   transform: rotate(180deg);
   font-size: 35px;
 }
-
 
 .login-card h2 {
   margin-bottom: 10px;
@@ -218,8 +232,8 @@ html {
 }
 
 .form-group i {
-  font-size: 12px; 
-  margin-left: -350px; 
+  font-size: 12px;
+  margin-left: -350px;
   color: #777;
   padding: auto;
   display: flex;
