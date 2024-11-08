@@ -7,6 +7,7 @@ interface Product extends Document {
   description: string;
   disponibilite: Boolean;
   categorie: String;
+  image: String;
 }
 
 const ProductSchema: Schema = new Schema({
@@ -16,6 +17,7 @@ const ProductSchema: Schema = new Schema({
   description: { type: String, required: true },
   disponibilite: { type: Boolean, required: true },
   categorie: { type: String, required: true },
+  image: { type: String, required: true },
 });
 
 const ProductsModel = model<Product>("Product", ProductSchema);
