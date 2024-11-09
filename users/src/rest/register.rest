@@ -1,9 +1,0 @@
-### Register
-POST http://localhost:3001/users/register
-Content-Type: application/json
-
-{
-  "email": "newuser@example.com",
-  "password": "password123",
-  "isAdmin": true
-}
