@@ -1,33 +1,10 @@
 <script>
-import Footer from "./Footer.vue"; // Assurez-vous que le chemin est correct
 
-export default {
-  components: {
-    Footer,
-  },
-};
 </script>
 
 <template>
   <section class="container">
-    <nav className="navbar">
-      <div className="logo">
-        <span>GRAPHIXHUB</span>
-        <span className="subtitle">A définir</span>
-      </div>
-
-      <div className="menu">
-        <div class="products">
-          <router-link to="/products" class="btn-login">Products</router-link>
-        </div>
-        <div class="cart-Login">
-          <router-link to="/login" class="btn-login">Login</router-link>
-        </div>
-        <div class="cart-register">
-          <router-link to="/register" class="btn-login">Register</router-link>
-        </div>
-      </div>
-    </nav>
+   
     <div class="principal">
       <div class="annonce-right slide-fade-in">
         <h1 class="text">Carte Graphique</h1>
@@ -52,7 +29,6 @@ export default {
         <img src="../assets/p4.jpeg" />
       </div>
     </div>
-    <Footer />
   </section>
 </template>
 
@@ -213,7 +189,9 @@ h1 {
 }
 .annonce-right:hover,
 .annonce-left:hover {
-  box-shadow: 20px 3px 3px 3px rgb(181, 181, 181);
+  transform: translateY(-10px); /* Moves the card up slightly */
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.5); /* Highlight effect */
+  cursor: pointer; /* Indicates interactivity */
 }
 .principal div {
   margin: 40px;
@@ -225,6 +203,7 @@ h1 {
 
 .annonce-right,
 .annonce-left {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
   transform: scale(1.1);
   position: relative;
   width: 200vh;

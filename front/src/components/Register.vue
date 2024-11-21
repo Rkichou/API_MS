@@ -5,10 +5,7 @@
       alt="background"
       class="background-image"
     />
-    <nav class="navbar">
-      <img src="../assets/img/logo.png" alt="logo" class="logo" />
-      <h1>GraphiXHub</h1>
-    </nav>
+    
     <div class="container">
       <div class="login-card">
         <button class="icon-button">
@@ -41,9 +38,7 @@
             <label for="checkbox">IsAdmin</label>
             <input type="checkbox" id="checkbox" v-model="isAdmin" />
           </div>
-          <div class="login-button">
-            <router-link to="/products"> Cree votre compte</router-link>
-          </div>
+          <button type="submit" class="login-button">Créer votre compte</button>
         </form>
       </div>
     </div>
@@ -51,7 +46,6 @@
 </template>
 
 <script>
-import router from "../router";
 export default {
   props: ["setIsLoggedIn", "setToken", "setUserId"],
 
@@ -66,11 +60,10 @@ export default {
     async handleSubmitRegister() {
       console.log("Email:", this.email);
       console.log("Mot de passe:", this.password);
-      console.log("IsAdmin", this.isAdmin);
-      console.log("Compte créé");
+      console.log("IsAdmin:", this.isAdmin);
 
       try {
-        const response = await fetch("http://localhost:3001/users/register", {
+        const response = await fetch("http://localhost:3005/users/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -82,19 +75,21 @@ export default {
 
         const data = await response.json();
         if (response.ok) {
-          this.setIsLoggedIn(true);
-          this.setToken(data.token);
+          console.log("Compte créé avec succès:", data);
+
+          // Update parent props or local storage for authentication
+        
           localStorage.setItem("token", data.token);
-          this.setUserId(data.userId);
           localStorage.setItem("userId", data.userId);
 
-          this.$router.push("/products");
+          // Redirect to the products page
+          this.$router.push("/");
         } else {
-          alert(data.msg);
+          alert(data.msg || "Erreur lors de l'inscription.");
         }
       } catch (error) {
         console.error("Erreur lors de l'inscription:", error);
-        alert("Erreur lors de l'inscription.");
+        alert("Erreur lors de l'inscription. Veuillez réessayer.");
       }
     },
   },
@@ -104,6 +99,7 @@ export default {
 <style scoped>
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 
+/* General Styles */
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +132,7 @@ html {
   z-index: -1;
 }
 
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -158,6 +155,7 @@ html {
   width: 80px;
 }
 
+/* Form Container */
 .container {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
@@ -203,6 +201,7 @@ html {
   color: grey;
 }
 
+/* Input Fields */
 .form-group {
   margin-bottom: 25px;
   position: relative;
@@ -233,6 +232,7 @@ html {
   align-items: center;
 }
 
+/* Submit Button */
 .login-button {
   width: 100%;
   padding: 10px;
@@ -244,6 +244,11 @@ html {
   cursor: pointer;
 }
 
+.login-button:hover {
+  background-color: #41434e;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     padding: 10px;
