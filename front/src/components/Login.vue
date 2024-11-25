@@ -2,57 +2,22 @@
 import { useRouter } from "vue-router";
 
 export default {
-  props: ["setIsLoggedIn", "setToken", "setUserId"],
+  props: [ "setToken", "setUserId"],
 
   data() {
     return {
       email: "",
       password: "",
-      isAdmin: "false",
+      baseURL: "http://localhost:3005", // Adjust based on your API Gateway
     };
   },
 
   methods: {
-    async handleSubmitRegister() {
-      console.log("Email:", this.email);
-      console.log("Mot de passe:", this.password);
-      console.log("IsAdmin", this.isAdmin);
-
-      try {
-        const response = await fetch("http://localhost:3001/users/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password,
-            isAdmin: this.isAdmin,
-          }),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          this.setIsLoggedIn(true);
-          this.setToken(data.token);
-          localStorage.setItem("token", data.token);
-          this.setUserId(data.userId);
-          localStorage.setItem("userId", data.userId);
-
-          // Navigation après succès
-          this.$router.push("/products");
-        } else {
-          alert(data.msg);
-        }
-      } catch (error) {
-        console.error("Erreur lors de l'inscription:", error);
-        alert("Erreur lors de l'inscription.");
-      }
-    },
-
     async handleSubmitLogin() {
-      console.log("Email:", this.email);
+      console.log("Attempting to log in with email:", this.email);
 
       try {
-        const response = await fetch("http://localhost:3001/users/login", {
+        const response = await fetch(`${this.baseURL}/users/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -66,42 +31,37 @@ export default {
         const data = await response.json();
 
         if (response.ok) {
-          console.log("connecté");
-          alert("Connexion réussie");
-          console.log("Utilisateur:", data);
-          this.setIsLoggedIn(true);
-          this.setToken(data.token);
+          console.log("Login successful:", data);
+          alert("Connexion réussie !");
+          
+          // Update app state with login data
           localStorage.setItem("token", data.token);
-          this.setUserId(data.userId);
+          alert(`Token: ${data.token}`);
           localStorage.setItem("userId", data.userId);
 
-          // Navigation après succès
-          this.$router.push("/products");
+          // Navigate to the products page
+          this.$router.push("/");
         } else {
-          alert(data.msg);
+          // Handle specific error messages from the API
+          console.error("Login error:", data.msg);
+          alert(`Erreur: ${data.msg}`);
         }
       } catch (error) {
-        console.error("Erreur lors de la connexion:", error);
-        alert("Erreur lors de la connexion.");
+        console.error("Erreur réseau lors de la connexion:", error);
+        alert("Erreur réseau. Veuillez réessayer plus tard.");
       }
     },
   },
 };
 </script>
 
+
 <template>
   <section class="landing_page">
     <img src="../assets/img/background.jpg" alt="background" />
-    <div class="navbar">
-      <img src="../assets/img/logo.png" alt="logo" />
-      <h1>GraphiXHub</h1>
-    </div>
+    
     <div class="container">
       <div class="login-card">
-        <div class="icon-button">
-          <i class="fi fi-ss-enter"></i>
-          <router-link to="/register" class="text">Login</router-link>
-        </div>
         <div class="login-page">
           <h2>Connexion</h2>
           <h5>Embarquez-vous dans l'univers du gaming haute performance !</h5>
@@ -114,6 +74,7 @@ export default {
                 required
                 placeholder="Email"
                 v-model="email"
+                value="newuser@example.com"
               />
               <i class="fi fi-ss-envelope"></i>
             </div>
@@ -125,12 +86,11 @@ export default {
                 required
                 placeholder="Mot de passe"
                 v-model="password"
+                value="password123"
               />
               <i class="fi fi-ss-lock"></i>
             </div>
-            <div class="login-button">
-              <router-link to="/products"> Connectez vous</router-link>
-            </div>
+            <button class="login-button" type="submit">Se connecter</button>
           </form>
         </div>
       </div>
