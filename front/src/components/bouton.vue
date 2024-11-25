@@ -141,7 +141,6 @@ img {
   color: #006d16;
   display: block;
 }
-
 @media (max-width: 768px) {
   .menu {
     display: none;
@@ -153,6 +152,16 @@ img {
     left: 0;
     z-index: 1;
     padding: 10px 0;
+  }
+
+  .principal {
+    width: auto;
+    position: relative;
+    display: flex; /* Active Flexbox */
+    flex-direction: row; /* Comportement par défaut */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .menu.open {
@@ -187,7 +196,30 @@ img {
     font-size: 14px; /* Réduire la taille de police */
     padding: 8px 15px; /* Ajuster les marges */
   }
+  #app {
+    background: #000;
+  }
+  .principal {
+    flex-direction: column; /* Les divs seront disposées en colonne */
+    align-items: center; /* Centre les éléments */
+  }
 
+  .principal div {
+    width: 80%; /* Ajuste la largeur des blocs */
+    margin: 20px auto; /* Centrage avec des marges automatiques */
+  }
+
+  .annonce-right,
+  .annonce-left {
+    width: 100%; /* S'assure que les blocs prennent toute la largeur disponible */
+    height: auto; /* Ajuste la hauteur automatiquement */
+  }
+
+  .annonce-right img,
+  .annonce-left img {
+    width: 100%; /* Ajuste la taille des images pour remplir leur conteneur */
+    height: auto;
+  }
   .menu-toggle {
     font-size: 26px; /* Réduire la taille du bouton */
     padding: 4px 8px;
@@ -221,6 +253,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .annonce-right,
