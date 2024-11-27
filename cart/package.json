@@ -8,6 +8,7 @@
         "dev": "nodemon src/app.js"
     },
     "dependencies": {
+        "cart_service": "file:",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "mongoose": "^5.13.8",
