@@ -35,3 +35,29 @@ DELETE http://localhost:3003/api/cart/clear/12345
 
 ### Get all carts
 GET http://localhost:3003/api/cart/all
+
+
+### Create checkout session
+POST http://localhost:3003/api/checkout/create-session
+Content-Type: application/json
+
+{
+    "items": [
+        {
+            "name": "Produit A",
+            "price": 2000,
+            "quantity": 1
+        },
+        {
+            "name": "Produit B",
+            "price": 1500,
+            "quantity": 2
+        }
+    ]
+}
+
+### Success URL for checkout (if needed for testing redirection handling)
+GET http://localhost:3003/success
+
+### Cancel URL for checkout (if needed for testing redirection handling)
+GET http://localhost:3003/cancel
