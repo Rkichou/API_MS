@@ -1,3 +1,4 @@
+
 const express = require('express');
 const connectDB = require('../src/config/db'); 
 const swaggerDocs = require('../src/config/Swagger');
@@ -16,9 +17,11 @@ app.use(express.json());
 app.use('/api/cart', require('../src/routes/cartRoutes'));
 app.use('/api/checkout', require('../src/routes/checkoutRoutes')); // Nouvelle route pour le checkout
 
+
 // Démarrer le serveur
 const PORT = 3003;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log('Swagger documentation available at http://localhost:3003/api-docs');
+
 });

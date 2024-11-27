@@ -1,0 +1,179 @@
+### Test User Routes through API Gateway
+# Register a new user
+POST http://localhost:3005/users/register
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "password123",
+    "isAdmin": true
+}
+
+### Test User Routes through API Gateway
+
+# Login a user
+POST http://localhost:3005/users/login
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "password123"
+}   
+
+### Test User Routes through API Gateway
+
+# Delete a user
+POST http://localhost:3005/users/delete
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmM5NGY4NDMwNTI3NmMwOWIzOWUzMiIsInJvbGUiOnRydWUsImlhdCI6MTczMDk3NTIzOSwiZXhwIjoxNzMwOTc4ODM5fQ.stnVPhKjK113ZfHLtf5biXKUlLh7cH_XC2f-4tYa4EY
+
+{
+    "_id": "672c94f84305276c09b39e32"
+}
+
+### Test Product Routes through API Gateway
+# Create a new product
+POST http://localhost:3005/products/create
+Content-Type: application/json
+
+{
+    "_id": "671f747f6224979ee66c53db",
+    "name": "New Product",
+    "price": 99.99,
+    "description": "Description of the new product",
+    "disponibilite": true,
+    "categorie": "Category"
+}
+
+### Test Product Routes through API Gateway
+# Get a product by ID
+GET http://localhost:3005/products/liste/671f747f6224979ee66c53db
+
+###
+
+# Get products
+GET http://localhost:3005/products/liste/
+
+###
+
+# Delete a product by ID
+DELETE http://localhost:3005/products/delete/
+Content-Type: application/json
+
+{
+  "_id": "671f747f6224979ee66c53db"
+}
+
+###
+
+# Update a product by ID
+PUT http://localhost:3005/products/update/671f747f6224979ee66c53db
+Content-Type: application/json
+
+{
+  "price": "5"
+}
+
+### Test Cart Routes through API Gateway
+# Add item to cart
+POST http://localhost:3005/cart/add
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde",
+    "quantity": 2
+}
+
+###
+
+# Remove item from cart
+DELETE http://localhost:3005/cart/remove
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde"
+}
+
+###
+
+# Update item quantity in cart
+PUT http://localhost:3005/cart/update
+Content-Type: application/json
+
+{
+    "user_id": "12345",
+    "product_id": "abcde",
+    "quantity": 5
+}
+
+### 
+
+# Get cart for a specific user
+GET http://localhost:3005/cart/user/12345
+
+###
+
+# Clear cart for a specific user
+DELETE http://localhost:3005/cart/clear/12345
+
+###
+
+# Get all carts
+GET http://localhost:3005/cart/all
+
+###
+
+### Test Order Routes through API Gateway
+# Create a new order
+POST http://localhost:3005/orders/create
+Content-Type: application/json
+
+{
+  "user_id": "60d0fe4f5311236168a109ca",
+  "items": [
+    {
+      "productId": "60d0fe4f5311236168a109cb",
+      "quantity": 2,
+      "price": 20.00
+    }
+  ],
+  "totalAmount": 40.00,
+  "status": "pending"
+}
+
+###
+
+# Get all orders
+GET http://localhost:3005/orders
+
+###
+
+# Get an order by ID
+GET http://localhost:3005/orders/672ca43c72b44d3417681547
+
+###
+
+# Update the status of an order
+PUT http://localhost:3005/orders/update/672ca43c72b44d3417681547
+Content-Type: application/json
+
+{
+    "status": "shipped"
+}
+
+###
+
+# Cancel an order
+PUT http://localhost:3005/orders/cancel/672ca43c72b44d3417681547
+Content-Type: application/json
+
+{
+    "status": "cancelled"
+}
+
+###
+
+# Delete an order
+DELETE http://localhost:3005/orders/672ca4e797534a2c1a1aabcf
