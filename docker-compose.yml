@@ -7,13 +7,14 @@ services:
       - "3001:3001"
     volumes:
       - ./users:/home/node/app
+      - /home/node/app/node_modules
     networks:
       - app-network
     depends_on:
       - user-db
 
   user-db:
-    image: mongo:latest 
+    image: mongo:latest
     container_name: user-mongo
     ports:
       - "27017:27017"
@@ -22,8 +23,130 @@ services:
     networks:
       - app-network
 
+  cart_service:
+    build:
+      context: ./cart
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./cart:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - cart-db
+
+  cart-db:
+    image: mongo:latest
+    container_name: cart-mongo
+    ports:
+      - "27020:27017"
+    volumes:
+      - cart-db-data:/data/db
+    networks:
+      - app-network
+
+  products-service:
+    build:
+      context: ./products
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./products:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - products-db
+
+  products-db:
+    image: mongo:latest
+    container_name: products-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - products-db-data:/data/db
+    networks:
+      - app-network
+
+  order-service:
+    build:
+      context: ./order
+      dockerfile: /docker/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - order-db
+    networks:
+      - app-network
+
+  order-db:
+    image: mongo:latest
+    ports:
+      - "27019:27017"
+    volumes:
+      - order-db-data:/data/db
+    networks:
+      - app-network
+
+  apigateway-service:
+    build:
+      context: ./api-gateway
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "3005:3005"
+    volumes:
+      - ./api-gateway:/home/node/app
+      - /home/node/app/node_modules
+    depends_on:
+      - user-service
+      - cart_service
+      - products-service
+      - order-service
+      - notif-service
+    networks:
+      - app-network
+    
+  notif-service:
+    build:
+      context: ./notif
+      dockerfile: Docker/Dockerfile
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./notif:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+
+  notif-db:
+    image: mongo:latest
+    ports:
+      - "27021:27017"
+    volumes:
+      - notif-db-data:/data/db
+    networks:
+      - app-network
+      
+  front_service:
+    build:
+      context: ./front
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+
 volumes:
   user-db-data:
+  cart-db-data:
+  products-db-data:
+  order-db-data:
+  notif-db-data:
 
 networks:
   app-network:

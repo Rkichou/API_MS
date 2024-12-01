@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" value="12345" required><br>
+
+        <label for="productId">Product ID:</label>
+        <input type="text" id="productId" name="productId" value="abcde" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="2" required><br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        
+        document.getElementById('myForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Empêche le rechargement de la page
+
+            const userId = document.getElementById('userId').value;
+            const productId = document.getElementById('productId').value;
+            const quantity = document.getElementById('quantity').value;
+
+            fetch('http://localhost:3000/api/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    productId: productId,
+                    quantity: quantity
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Erreur:', error));
+        });
+    </script>
+</body>
+</html>

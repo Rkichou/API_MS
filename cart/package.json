@@ -1,0 +1,23 @@
+{
+    "name": "cart_service",
+    "version": "1.0.0",
+    "description": "Microservice for handling shopping cart functionality",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "cart_service": "file:",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "mongoose": "^5.13.8",
+        "stripe": "^17.3.1",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.12"
+    }
+}

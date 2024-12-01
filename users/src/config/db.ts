@@ -11,7 +11,7 @@ const connectDB = async () => {
   try {
     console.log("Connecting to the database User...");
     const mongoUrl =
-      process.env.MONGO_URL || "mongodb://user-db:27017/MicroService-Users";
+      process.env.MONGO_USERS || "mongodb://user-db:27017/MicroService-Users";
     if (!mongoUrl) {
       throw new Error("MONGO_URI is not defined in the environment variables");
     }

@@ -1,0 +1,8 @@
+POST http://localhost:3004/notifications/send
+Content-Type: application/json
+
+{
+    "to": "guillaumel1103@gmail.com",
+    "subject": "Test Email",
+    "text": "This is a test email sent from the API."
+}
