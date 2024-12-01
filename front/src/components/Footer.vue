@@ -1,27 +1,29 @@
 <template>
   <footer class="footer">
     <div class="footer-content">
-      <div class="footer-section links">
+      <div class="footer-section">
         <h2>Liens utiles</h2>
         <ul>
           <li><router-link to="/">Accueil</router-link></li>
           <li><router-link to="/products">Produits</router-link></li>
-          <li><router-link to="#">À propos</router-link></li>
-          <li><router-link to="#">Contact</router-link></li>
+          <li><router-link to="/about">À propos</router-link></li>
+          <li><router-link to="/contact">Contact</router-link></li>
         </ul>
       </div>
       <div class="footer-section social">
-        <h2>Suivez-nous</h2>
         <div class="social-icons">
-          <img
-            src="../assets/icons/instagram.png"
-            widht="30"
-            height="30"
-            alt="instagram"
-          />
-          <p>INSTAGRAM</p>
-          <img src="../assets/icons/twitter.png" widht="30" height="30" />
-          <img src="../assets/icons/linkedin.png" widht="30" height="30" />
+          <a href="#" class="social-link">
+            <img src="../assets/icons/instagram.png" alt="Instagram" class="social-icon"/>
+            <span>Instagram</span>
+          </a>
+          <a href="#" class="social-link">
+            <img src="../assets/icons/twitter.png" alt="Twitter" class="social-icon"/>
+            <span>Twitter</span>
+          </a>
+          <a href="#" class="social-link">
+            <img src="../assets/icons/linkedin.png" alt="LinkedIn" class="social-icon"/>
+            <span>LinkedIn</span>
+          </a>
         </div>
       </div>
     </div>
@@ -39,48 +41,42 @@ export default {
 
 <style scoped>
 .footer {
-  width: auto;
   background: #274c77;
   color: #ffffff;
-  padding-top: 40px;
-
-  text-align: center;
+  padding: 2rem 0;
+  width: 100%;
 }
 
 .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  margin: auto;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 .footer-section {
-  flex: 1;
-  min-width: 200px;
-  padding: 10px;
+  text-align: center;
 }
 
 .footer-section h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.footer-section p,
-.footer-section ul {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .footer-section ul {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: column; /* Change en colonne */
-  align-items: center; /* Centre les éléments si besoin */
+  justify-content: center;
+  gap: 1rem;
 }
 
-.footer-section li {
-  margin: 5px 0;
+.footer-section ul li {
+  margin: 0.5rem 0;
 }
 
 .footer-section ul li a {
@@ -92,29 +88,48 @@ export default {
 .footer-section ul li a:hover {
   color: #ffffff;
 }
+
 .social-icons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
-.social-icons a:hover {
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #a3cef1;
+  transition: color 0.3s;
+}
+
+.social-link:hover {
   color: #ffffff;
 }
 
+.social-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 0.5rem;
+}
+
 .footer-bottom {
-  background: #19324d;
-  padding: 10px;
-  font-size: 14px;
-  color: #a3cef1;
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
   border-top: 1px solid #a3cef1;
+  color: #a3cef1;
 }
 
 @media (max-width: 768px) {
   .footer-content {
-    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .footer-section {
-    margin-bottom: 20px;
+  .social-icons {
+    gap: 1.5rem;
   }
 }
 </style>

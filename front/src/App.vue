@@ -1,25 +1,14 @@
 <template>
-  <div>
-  <Header />
-
-  <main>
-    <RouterView />
-  </main>
-
-  <Footer />
-</div>
+  <div class="min-h-screen bg-gray-50">
+    <Navbar />
+    <main class="container mx-auto px-4 py-8">
+      <router-view></router-view>
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
-import Header from './components/Header.vue'
+import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 </script>
-
-<style >
-body {
-  margin: 0;
-  padding: 0;
-  width: 98.9vw; /* Définit la largeur du body à celle de la fenêtre */
-
-}
-</style>

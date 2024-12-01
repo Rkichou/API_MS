@@ -1,11 +1,13 @@
-import { createApp, createRouter } from "vue";
-import "./style.css";
-import App from "./App.vue";
-import Products from "./components/Products.vue";
-import router from "./router.js";
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+import App from './App.vue'
+import router from './router'
+import './index.css'
 
-// const app = createApp(App);
-// app.use(router); // Assurez-vous que le routeur est bien ajouté ici
-// app.mount("#app");
-
-createApp(App).use(router).mount("#app");
+const app = createApp(App)
+app.use(createPinia())
+app.use(router)
+app.use(Toast)
+app.mount('#app')

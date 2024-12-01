@@ -4,8 +4,8 @@ POST http://localhost:3005/users/register
 Content-Type: application/json
 
 {
-    "email": "newuser@example.com",
-    "password": "password123",
+    "email": "test@free.fr",
+    "password": "password",
     "isAdmin": true
 }
 

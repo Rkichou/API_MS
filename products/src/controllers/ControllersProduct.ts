@@ -1,64 +1,6 @@
 import Products from "../models/ModelsProducts";
 import { Request, Response } from "express";
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Product:
- *       type: object
- *       required:
- *         - _id
- *         - prix
- *         - name
- *         - description
- *         - disponibilite
- *         - categorie
- *         - tags
- *       properties:
- *         _id:
- *           type: string
- *           description: L'identifiant de l'utilisateur qui ajoute le produit
- *         prix:
- *           type: number
- *           description: Le prix du produit
- *         name:
- *           type: string
- *           description: Le nom du produit
- *         description:
- *           type: string
- *           description: La description du produit
- *         disponibilite:
- *           type: boolean
- *           description: Disponibilité du produit
- *         categorie:
- *           type: string
- *           description: La catégorie du produit
- *         tags:
- *           type: array
- *           items:
- *             type: string
- *           description: Les tags associés au produit
- */
-
-/**
- * @swagger
- * /products:
- *   get:
- *     summary: Récupère tous les produits
- *     tags: [Products]
- *     responses:
- *       200:
- *         description: La liste des produits
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Product'
- *       500:
- *         description: Erreur lors de la récupération des produits
- */
 const allProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const products = await Products.find();
@@ -71,31 +13,6 @@ const allProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-/**
- * @swagger
- * /products/{id}:
- *   get:
- *     summary: Récupère un produit par ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: L'ID du produit
- *     responses:
- *       200:
- *         description: Le produit correspondant à l'ID
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Product'
- *       400:
- *         description: Produit non trouvé
- *       500:
- *         description: Erreur lors de la récupération du produit
- */
 const productById = async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await Products.findById(req.params.id);
@@ -104,43 +21,67 @@ const productById = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    // Recherche de produits similaires basée sur les tags et le score de performance
     const similarProducts = await Products.find({
-      $or: [
-        { categorie: { $in: product.tags } },        // Produits dont la catégorie correspond à l'un des tags du produit actuel
-      ],
-      _id: { $ne: product._id }                       // Exclure le produit actuel
-    }).limit(5);  
+      $and: [
+        { _id: { $ne: product._id } }, // Exclure le produit actuel
+        {
+          $or: [
+            { tags: { $in: product.tags } }, // Produits partageant des tags
+            { 
+              performance_score: { 
+                $gte: product.performance_score ? product.performance_score * 0.8 : 0,
+                $lte: product.performance_score ? product.performance_score * 1.2 : 0
+              }
+            }, // Produits avec un score de performance similaire (±20%)
+            { categorie: product.categorie } // Produits de la même catégorie
+          ]
+        }
+      ]
+    })
+    .limit(5)
+    .select('name price description image tags performance_score categorie');
 
-    // Retourne à la fois le produit et les recommandations
-    res.json({ product, recommendations: similarProducts });
+    // Trier les recommandations par pertinence
+    const recommendationsWithScore = similarProducts.map(prod => {
+      let relevanceScore = 0;
+      
+      // Points pour les tags communs
+      const commonTags = prod.tags.filter(tag => product.tags.includes(tag));
+      relevanceScore += commonTags.length * 2;
+      
+      // Points pour la catégorie
+      if (prod.categorie === product.categorie) {
+        relevanceScore += 3;
+      }
+      
+      // Points pour le score de performance similaire
+      if (product.performance_score && prod.performance_score) {
+        const perfDiff = Math.abs(product.performance_score - prod.performance_score);
+        if (perfDiff <= 10) relevanceScore += 3;
+        else if (perfDiff <= 20) relevanceScore += 2;
+        else if (perfDiff <= 30) relevanceScore += 1;
+      }
+      
+      return {
+        ...prod.toObject(),
+        relevanceScore
+      };
+    }).sort((a, b) => b.relevanceScore - a.relevanceScore);
+
+    res.json({ 
+      product,
+      recommendations: recommendationsWithScore.map(({ relevanceScore, ...prod }) => prod)
+    });
+
   } catch (error) {
     res.status(500).json({ message: "Erreur lors de la récupération du produit", error });
   }
 };
 
-
-
-/**
- * @swagger
- * /products:
- *   post:
- *     summary: Crée un nouveau produit
- *     tags: [Products]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Product'
- *     responses:
- *       201:
- *         description: Produit créé avec succès
- *       500:
- *         description: Erreur lors de la création du produit
- */
 const newProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie, image, tags } =
+    const { _id, price, name, description, disponibilite, categorie, image, tags, performance_score } =
       req.body;
     const product = new Products({
       _id,
@@ -150,7 +91,8 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
       disponibilite,
       categorie,
       image,
-      tags
+      tags,
+      performance_score
     });
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
@@ -159,32 +101,10 @@ const newProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
-/**
- * @swagger
- * /products/{id}:
- *   delete:
- *     summary: Supprime un produit par ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: L'ID du produit
- *     responses:
- *       204:
- *         description: Produit supprimé avec succès
- *       400:
- *         description: Produit non trouvé
- *       500:
- *         description: Erreur lors de la suppression du produit
- */
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { _id } = req.body;
-    console.log("ID du produit à supprimer:", _id); // Log de l'ID du produit
+    console.log("ID du produit à supprimer:", _id);
 
     if (!_id) {
       console.log("ID du produit manquant");
@@ -209,36 +129,9 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-/**
- * @swagger
- * /products/{id}:
- *   put:
- *     summary: Met à jour un produit par ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: L'ID du produit
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Product'
- *     responses:
- *       200:
- *         description: Produit mis à jour avec succès
- *       400:
- *         description: Produit non trouvé
- *       500:
- *         description: Erreur lors de la mise à jour du produit
- */
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { _id, price, name, description, disponibilite, categorie, image, tags } =
+    const { _id, price, name, description, disponibilite, categorie, image, tags, performance_score } =
       req.body;
     const product = await Products.findByIdAndUpdate(
       req.params.id,
@@ -250,7 +143,8 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
         disponibilite,
         categorie,
         image,
-        tags
+        tags,
+        performance_score
       },
       { new: true }
     );

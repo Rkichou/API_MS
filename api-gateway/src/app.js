@@ -8,6 +8,7 @@ import {
   handleOrdersRequest,
   handleProductsRequest,
   handleCartRequest,
+  handleCheckoutRequest,
 } from "./controllers/ApiGatewayController.js";
 
 const app = express();
@@ -23,10 +24,14 @@ setupSwagger(app);
 app.use("/users", handleUsersRequest);
 app.use("/orders", handleOrdersRequest);
 app.use("/products", handleProductsRequest);
+app.use("/cart/checkout", handleCheckoutRequest);
 app.use("/cart", handleCartRequest);
 app.use("/", (req, res) => {
   res.send("API Gateway");
 });
+
 app.listen(PORT, () => {
   console.log(`API Gateway running on port ${PORT}`);
 });
+
+export default app;
